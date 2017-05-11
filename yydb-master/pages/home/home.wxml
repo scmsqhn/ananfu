@@ -21,7 +21,7 @@
             <image class="category-item-image" src="../../resources/images/ic_index_tab_share.png" />
             <text class="category-item-text">晒单</text>
         </view>
-        <view class="category-item">
+        <view class="category-item" bindtap="toFaq">
             <image class="category-item-image" src="../../resources/images/ic_index_tab_qa.png" />
             <text class="category-item-text">常见问题</text>
         </view>

@@ -14,8 +14,8 @@ Page( {
     interval: 5000,
     duration: 1000,
     windowWidth: 320,
-    sortPanelTop: '0',
-    sortPanelDist: '290',
+    sortPanelTop: '290',
+    sortPanelDist: '0',
     sortPanelPos: 'relative',
     noticeIdx: 0,
     notices: [
@@ -196,7 +196,6 @@ Page( {
         me.setData( { windowWidth: res.windowWidth })
       }
     });
-
     console.log( 'onLoad' );
   },
   startNotice: function() {
@@ -243,8 +242,27 @@ Page( {
 
   onClick: function(e){
     //console.log(e.srcElement.dataset.index)
-	var index = console.log(e.currentTarget.dataset.index)//获得页面index
-	wx.navigateTo({url: '../item/item?index=%s',index});
+	var index = e.currentTarget.dataset.index//获得页面index
+	console.log("index="+index)
+	console.log("../item/item?index="+index)
+	wx.navigateTo({url: "../item/item?index="+index});
+  },
+  toFaq: function(e){
+	wx.navigateTo({url: "../faq/faq"});
+	console.log("toFaq")
   },
   
+  onAdd2List: function(e){
+	var keyword = e.detail.value;  
+	wx.request({  
+	 url:config.loginUrl.order,  
+	 data:{item:12345},
+	 header: {'Content-Type': 'application/json'},  
+	 success: function(res){
+	   console.log(res)
+	 }
+	})
+	console.log("toFaq")
+  },
+
 })

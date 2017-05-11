@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">安安福问题解答</text>
+  </view>
+  <view class="page__hd">
+    <text>\r\n安安福常见问题解答\r\n</text>
+    <text>\r\n\t1. 什么是一元夺宝?\r\n</text>
+    <text>\r\n\t\t一元夺宝是安安家联合长虹京东推出的全新平台业务，旨在增加用户购买付费商品的趣味性。每个用户只需1元就有机会获得心仪的产品。</text>
+  </view>
+  <view class="page__hd">
+    <text>\r\n\t安安福常见问题解答\r\n</text>
+    <text>\r\n\t1. 什么是一元夺宝?\r\n</text>
+    <text>\t\t一元夺宝是安安家联合长虹京东推出的全新平台业务，旨在增加用户购买付费商品的趣味性。每个用户只需1元就有机会获得心仪的产品。</text>
+  </view>
+  <view class="page__hd">
+    <text>\r\n\t2. 怎样参加一元夺宝?</text>
+    <text>\t\t用户无需注册,使用微信账号,就可以参加一元夺宝了。\r\n</text>
+    <text>\t\t选择自己喜欢的商品，选择要参与的人次并支付；每人次需要花费一元，获得一个夺宝号码，然后开始夺宝。\r\n</text>
+  </view>
+</view>

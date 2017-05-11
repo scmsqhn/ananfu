@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)file:///H:/yydb-master/yydb-master/pages/faq/faq.wxml -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>安安福问题解答</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>安安福常见问题解答</h1>
+        <p>1. 什么是一元夺宝?</p>
+        <ul>
+            <li><a>一元夺宝是安安家联合长虹京东推出的全新平台业务，旨在增加用户购买付费商品的趣味性。每个用户只需1元就有机会获得心仪的产品。
+			</a></li>
+            <li><a href="file:///H:/user">检查登录</a></li>
+        </ul>
+        <p>2. 怎样参加一元夺宝?</p>
+        <ul>
+            <li><a>用户登录或者注册同花顺账号，就可以参加一元夺宝了。
+            </a></li><li><a href="file:///H:/user">参加方式：</a></li>
+            <li><a href="file:///H:/user">　　选择自己喜欢的商品，选择要参与的人次并支付；每人次需要花费一元，获得一个夺宝号码，然后开始夺宝。</a></li>
+        </ul>
+    </div>
+
+</body></html>

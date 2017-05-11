@@ -12,7 +12,7 @@
                 <view class="tips">揭晓进度<span>{{goods.takeRate * 100}}%</span></view>
                 <view class="progress" style="width: calc(100% - 76px);"></view>
                 <view class="progress-take" style="width: calc((100% - 76px) * {{goods.takeRate}} );"></view>
-                <view class="btn">加入清单</view>
+                <view class="btn" bindtap="onAdd2List">加入清单</view>
             </view>
         </view>
 </template>
