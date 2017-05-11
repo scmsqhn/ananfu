@@ -244,8 +244,7 @@ Page( {
   onClick: function(e){
     //console.log(e.srcElement.dataset.index)
 	var index = console.log(e.currentTarget.dataset.index)//获得页面index
-	wx.navigateTo({url: '../item/item'});
+	wx.navigateTo({url: '../item/item?index=%s',index});
   },
   
-
 })
