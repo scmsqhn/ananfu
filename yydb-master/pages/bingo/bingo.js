@@ -51,7 +51,8 @@ Page( {
         "period": 211116272,
         "takeRate":0.01,
         "takeChances": 70,
-        "totalChances": 8090
+        "totalChances": 8090,
+        "winner": "铁木真"
       },
       {
         "goods": {
@@ -66,6 +67,7 @@ Page( {
         "takeRate":0.19,
         "takeChances": 632,
         "totalChances": 3288
+        ,"winner": "辛弃疾"
       },
       {
         "goods": {
@@ -80,6 +82,7 @@ Page( {
         "takeRate":0.26,
         "takeChances": 3760,
         "totalChances": 14288
+        ,"winner": "舒克贝塔"
       },
       {
         "goods": {
@@ -94,6 +97,7 @@ Page( {
         "takeRate":0.05,
         "takeChances": 300,
         "totalChances": 5990
+        ,"winner": "哪吒"
       },
       {
         "goods": {
@@ -108,6 +112,7 @@ Page( {
         "takeRate":0.17,
         "takeChances": 514,
         "totalChances": 2999
+        ,"winner": "朱耷"
       },
       {
         "goods": {
@@ -122,6 +127,7 @@ Page( {
         "takeRate":0.13,
         "takeChances": 630,
         "totalChances": 4950
+        ,"winner": "李元吉"
       },
       {
         "goods": {
@@ -136,6 +142,7 @@ Page( {
         "takeRate":0.45,
         "takeChances": 680,
         "totalChances": 1500
+        ,"winner": "程咬金"
       },
       {
         "goods": {
@@ -150,6 +157,7 @@ Page( {
         "takeRate":0.04,
         "takeChances": 7,
         "totalChances": 199
+        ,"winner": "mark"
       },
       {
         "goods": {
@@ -164,6 +172,7 @@ Page( {
         "takeRate":0.95,
         "takeChances": 14200,
         "totalChances": 14990
+        ,"winner": "ken"
       }, {
       "goods": {
         "buyUnit": 10,
@@ -177,6 +186,7 @@ Page( {
       "takeRate":0.01,
       "takeChances": 70,
       "totalChances": 8090
+        ,"winner": "spider-man"
     }
     ],
     animationNotice: {}

@@ -1,0 +1,26 @@
+<!-- bingo.wxml -->
+
+<view class="goods-panel">
+	<!--<import src="tpl/goodsList.wxml"/>-->
+	<template is="goodsList" data="{{goodsList:goodsList}}"/>
+</view>
+
+<!--<view style="background: blue; width: 100%; height: 200px"></view>-->
+<template name="goodsItem">
+    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" bindtap="onClick">
+            <view class="goods">
+                <view class="goods-tag ten" />
+                <image class="goods-image" src="{{goods.goods.imgUrl}}" />
+                <view class="desc-wrapper">
+                    <view class="goods-desc">{{goods.goods.name}}</view>
+                </view>
+                <view class="tips" style="background: red">{{goods.period}} 期开奖<span>{{goods.winner}}</span></view>
+            </view>
+        </view>
+</template>
+
+<template name="goodsList">
+    <block wx:for="{{goodsList}}">
+        <template is="goodsItem" data="{{index:index,goods:item}}"/>
+    </block>
+</template>

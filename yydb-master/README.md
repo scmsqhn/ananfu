@@ -54,3 +54,39 @@ git push origin master
 　　7、如果一件商品很久都没达到总需人次怎么办？
 　　若某件商品的夺宝号码从开始分配之日起90天未分配完毕，则同花顺公司有权取消该件商品的夺宝活动，并向用户退还夺宝币，所退还夺宝币将在3个工作日内退还至用户账户中。
 
+---
+# 9:40 2017/5/12
+## js {{}} 功能
+
+## list 菜单,由数据生成界面
+home.wxml
+    <view class="goods-panel">
+        <import src="tpl/goodsList.wxml"/>
+        <template is="goodsList" data="{{goodsList:goodsList}}"/>
+    </view>
+
+goodsList.wxml
+	<template name="goodsList">
+		<block wx:for="{{goodsList}}">
+			<template is="goodsItem" data="{{index:index,goods:item}}"/>
+		</block>
+	</template>
+	
+goodsList.wxml
+	<template>
+    	<view>
+	    	<...>
+		        <image/>
+    	</view>
+	</template>
+	
+### 微信小程序图片自适应
+
+
+
+
+
+
+
+
+

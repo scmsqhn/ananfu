@@ -28,6 +28,11 @@ var config = {
         // 测试的信道服务地址
         tunnelUrl: `https://${host}/tunnel`,
 
+        // 付款服务地址
+        wxPayUrl: `https://${host}/weixinpay/xiadan`,
+
+        // 下单服务地址
+        orderUrl: `https://${host}/order`,
     }
 };
 

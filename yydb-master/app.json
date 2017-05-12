@@ -3,6 +3,9 @@
     "pages/home/home",
     "pages/item/item",
     "pages/faq/faq"
+    ,"pages/bingo/bingo"
+	,"pages/shoppinglist/shoppinglist"
+	,"pages/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,22 +25,17 @@
       "selectedIconPath":"resources/images/ic_home_selected.png"
     },{
       "text": "开奖",
-      "pagePath": "pages/home/home",
+      "pagePath": "pages/bingo/bingo",
       "iconPath": "resources/images/ic_win.png",
       "selectedIconPath":"resources/images/ic_win_selected.png"
     },{
-      "text": "发现",
-      "pagePath": "pages/home/home",
-      "iconPath": "resources/images/ic_find.png",
-      "selectedIconPath":"resources/images/ic_find_selected.png"
-    },{
       "text": "清单",
-      "pagePath": "pages/home/home",
+      "pagePath": "pages/shoppinglist/shoppinglist",
       "iconPath": "resources/images/ic_listing.png",
       "selectedIconPath":"resources/images/ic_listing_selected.png"
     },{
       "text": "我",
-      "pagePath": "pages/home/home",
+      "pagePath": "pages/history/history",
       "iconPath": "resources/images/ic_user.png",
       "selectedIconPath":"resources/images/ic_user_selected.png"
     }]
