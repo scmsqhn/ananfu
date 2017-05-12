@@ -80,7 +80,37 @@ goodsList.wxml
     	</view>
 	</template>
 	
-### 微信小程序图片自适应
+### bug list
+
+1. 微信小程序图片自适应
+
+imageLoad
+
+2. 上传代码
+3. 实现服务器部分
+4. goods 数据结构:
+---
+goods:
+	buyUnit 最小投注单位
+	desc 产品描述
+	id 期数,产品标示?
+	imgUrl 图片位置 png 格式
+period: 211116272 期数
+takerate: 0.01, 投注进度
+takechances: 70, 当前投注金额 
+totalchances: 8090,  总投注金额
+winner: "铁木真" 得主
+datestart:开售时间
+dateend:开奖时间
+---
+
+下单信息
+orderNum:订单号
+orderTime:下单时间 
+wxID:下单微信ID
+orderJine:下单金额
+period:下单期数
+
 
 
 
