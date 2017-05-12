@@ -1,6 +1,9 @@
 <!-- bingo.wxml -->
 
 <view class="goods-panel">
+	<view class = "item-page" style="width: 100%">
+    <button class="animation-button" bindtap="payit">一键支付</button>
+	</view>
 	<!--<import src="tpl/goodsList.wxml"/>-->
 	<template is="goodsList" data="{{goodsList:goodsList}}"/>
 </view>
