@@ -287,13 +287,14 @@ Page({
 				success: function (res) {
 					console.log('for pay purpose ,login success\r\n')
 					console.log(res)
-					that.getOpenId(res.code);
+					that.getOpenId(res);
 				}
 			});
 
 		},
 		//获取openid
-		getOpenId: function (code) {
+		getOpenId: function (res) {
+            var code = res.code
 			console.log('to get getOpenId\r\n')
 			var that = this;
 			console.log("send order to 70139330 to init the order, important")
