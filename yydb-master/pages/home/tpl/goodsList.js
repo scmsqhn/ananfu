@@ -2,17 +2,17 @@ var app = getApp()
 Page( {
   onReady: function() {
 
-    console.log( 'onReady' );
+    //console.log( 'onReady' );
   },
   onLoad: function() {
-    console.log( 'onLoad' );
+    //console.log( 'onLoad' );
   },
   onShow: function() {
-    console.log( 'onShow' );
+    //console.log( 'onShow' );
 
   },
   onToTop: function( e ) {
-    console.log( e.detail.scrollTop )
+    //console.log( e.detail.scrollTop )
   },
   
 

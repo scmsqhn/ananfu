@@ -14,7 +14,7 @@
                 <view class="desc-wrapper">
                     <view class="goods-desc">{{goods.goods.name}}</view>
                 </view>
-                <view class="tips" style="background: red">{{goods.period}} 期开奖<span>{{goods.winner}}</span></view>
+                <view class="tips" ><span>{{goods.period}} 期 {{goods.winner}}</span></view>
             </view>
         </view>
 </template>

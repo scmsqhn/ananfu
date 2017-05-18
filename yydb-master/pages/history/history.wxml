@@ -1,31 +1,28 @@
-<!-- bingo.wxml -->
-<!--	
-	<view class="tips" style="background: red, width=100%, height=200px" >开奖结果</view>
+<!-- shoppinglist.wxml -->
 
--->
-<view class="goods-panel">
-	<!--<import src="tpl/goodsList.wxml"/>-->
-	<template is="goodsList" data="{{goodsList:goodsList}}"/>
+<view class="goods-panel" bindtap="refresh">
+	<template is="orderList" data="{{orderList:orderList}}"/>
 </view>
 
-<!--<view style="background: blue; width: 100%; height: 200px"></view>-->
+<template name="orderList">
+    <block wx:for="{{orderList}}">
+        <template is="goodsItem" data="{{index:index,goods:item}}"/>
+    </block>
+</template>
+
 <template name="goodsItem">
-    <view class="goods-item{{index}}" id="tapTest" data-index="{{index}}" bindtap="onClick" style="width:100%">
+    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" >
             <view class="goods">
-                <view class="goods-tag ten"/>
-                <image class="goods-image" bindtap="imageLoad" src="{{goods.goods.imgUrl}}"/>
+                <view class="goods-tag ten" />
+                <image class="goods-image" src="{{goods.goods.imgUrl}}" bindtap="onClick"/>
                 <view class="desc-wrapper">
-                    <view class="goods-desc">{{goods.goods.name}} 即将开奖</view>
+                    <view class="goods-desc">{{goods.name}}</view>
                 </view>
             </view>
-			<view class="operating">
-				<view style="background: red; width: 100%; height: 5px" ></view>
+            <view class="operating">
+                <view class="tips">{{goods.period}}</view>
+                <view class="btn" data-index="{{index}}" >中奖</view>
             </view>
         </view>
 </template>
 
-<template name="goodsList">
-    <block wx:for="{{goodsList}}">
-        <template is="goodsItem" data="{{index:index,goods:item}}"/>
-    </block>
-</template>

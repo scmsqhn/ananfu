@@ -8,24 +8,6 @@
             </swiper-item>
         </block>
     </swiper>
-    <view class="category-panel">
-        <view class="category-item">
-            <image class="category-item-image" src="../../resources/images/ic_index_tab_kind.png" />
-            <text class="category-item-text">待购清单</text>
-        </view>
-        <view class="category-item">
-            <image class="category-item-image" src="../../resources/images/ic_index_tab_ten.png" />
-            <text class="category-item-text">优选</text>
-        </view>
-        <view class="category-item">
-            <image class="category-item-image" src="../../resources/images/ic_index_tab_share.png" />
-            <text class="category-item-text">晒单</text>
-        </view>
-        <view class="category-item" bindtap="toFaq">
-            <image class="category-item-image" src="../../resources/images/ic_index_tab_qa.png" />
-            <text class="category-item-text">常见问题</text>
-        </view>
-    </view>
     <block wx:if="{{notices.length>0}}">
         <view class="notice-panel">
             <image class="notice-image" src="../../resources/images/ic_notice.png" />

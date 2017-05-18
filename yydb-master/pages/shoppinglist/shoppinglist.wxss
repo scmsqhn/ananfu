@@ -189,6 +189,17 @@
     text-align: center;
     border:1px solid #e6324a;
 }
+.operating .picker {
+    width: 56px;
+    height: 26px;
+    left: 5px;
+    border-radius: 4px;
+    position: absolute;
+    line-height: 26px;
+    text-align: center;
+    border:1px solid #e6324a;
+}
+
 .operating .progress{
     height: 5px;
     margin-top:20px;
@@ -215,4 +226,8 @@
 .tips span{
     color: #007aff;
     padding-left: 2px;
+}
+.rowbar{  
+  display: flex;  
+  flex-direction: row;  
 }

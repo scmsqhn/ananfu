@@ -1,9 +1,9 @@
 <!-- goodsList.wxml -->
 <template name="goodsItem">
-    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" bindtap="onClick">
+    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" >
             <view class="goods">
                 <view class="goods-tag ten" />
-                <image class="goods-image" src="{{goods.goods.imgUrl}}" />
+                <image class="goods-image" src="{{goods.goods.imgUrl}}" bindtap="onClick"/>
                 <view class="desc-wrapper">
                     <view class="goods-desc">{{goods.goods.name}}</view>
                 </view>
@@ -12,7 +12,7 @@
                 <view class="tips">揭晓进度<span>{{goods.takeRate * 100}}%</span></view>
                 <view class="progress" style="width: calc(100% - 76px);"></view>
                 <view class="progress-take" style="width: calc((100% - 76px) * {{goods.takeRate}} );"></view>
-                <view class="btn" bindtap="onAdd2List">加入清单</view>
+                <view class="btn" bindtap="onAdd2List" data-index="{{index}}">加入清单</view>
             </view>
         </view>
 </template>

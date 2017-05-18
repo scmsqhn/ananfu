@@ -1,17 +1,20 @@
+var app = getApp()
 var order = ['green', 'red', 'yellow', 'blue', 'green']
 Page({
+  data: app.getData(),
   data: {
-    toView: 'green',
-	index:0
+    toView: 'green'
+  	,index:1
+    ,toImg:{}
   },
   upper: function(e) {
-    console.log(e)
+    //console.log(e)
   },
   lower: function(e) {
-    console.log(e)
+    //console.log(e)
   },
   scroll: function(e) {
-    console.log(e)
+    //console.log(e)
   },
   scrollToTop: function(e) {
     this.setAction({
@@ -37,7 +40,7 @@ Page({
   },
 
   payit: function(e) {
-    console.log("start payit\r\n")
+    //console.log("start payit\r\n")
     var that = this;
     wx.login({
       success: function(res) {
@@ -69,7 +72,7 @@ Page({
   
   //下单
   xiadan: function(openId){
-	console.log("xiadan")
+	//console.log("xiadan")
     var that = this;
     wx.request({
         url: config.service.wxPayUrl,
@@ -81,7 +84,7 @@ Page({
         success: function(res) {
            showLog('xiadan succ')
            var prepay_id = res.data.prepay_id;
-           console.log("统一下单返回 prepay_id:"+prepay_id);
+           //console.log("统一下单返回 prepay_id:"+prepay_id);
            that.sign(prepay_id);
         }
     })
@@ -102,8 +105,11 @@ Page({
         }
     })
   },
+  getImgUrls: function(index){
+  	return app.getImgUrls(index)
+  }
   //申请支付
-  requestPayment: function(obj){
+  ,requestPayment: function(obj){
     wx.requestPayment({
       'timeStamp': obj.timeStamp,
       'nonceStr': obj.nonceStr,
@@ -117,15 +123,16 @@ Page({
     })
   },  
 
-
   onLoad: function(options) {
     var me = this;
-	console.log("===")
-	console.log(options.index)
+	//console.log("===")
+	//console.log("options.index="+options.index)
 	me.setData({
 		index:options.index
+        ,toImg:this.getImgUrls(options.index)
 	})
-    var animation = wx.createAnimation( {
+	//console.log("img3="+me.data.toImg.img1)
+    var animation = wx.createAnimation({
       duration: 400,
       timingFunction: 'ease-out',
     });
@@ -135,6 +142,6 @@ Page({
         me.setData( { windowWidth: res.windowWidth })
       }
     });
-    console.log( 'onLoad' );
+    //console.log( 'onLoad' );
   },
 })

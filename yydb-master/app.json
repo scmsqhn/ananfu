@@ -6,6 +6,7 @@
     ,"pages/bingo/bingo"
 	,"pages/shoppinglist/shoppinglist"
 	,"pages/history/history"
+    ,"pages/picker/picker"
   ],
   "window": {
     "backgroundTextStyle": "light",

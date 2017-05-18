@@ -1,29 +1,31 @@
-<!-- bingo.wxml -->
+<!-- shoppinglist.wxml -->
 
-<view class="goods-panel">
+<view class="goods-panel" bindtap="refresh">
 	<view class = "item-page" style="width: 100%">
-    <button class="animation-button" bindtap="payit">一键支付</button>
+        <button class="animation-button" bindtap="payit">一键支付</button>
 	</view>
-	<!--<import src="tpl/goodsList.wxml"/>-->
-	<template is="goodsList" data="{{goodsList:goodsList}}"/>
+	<template is="orderList" data="{{orderList:orderList,point:point, myarray:myarray}}"/>
 </view>
 
-<!--<view style="background: blue; width: 100%; height: 200px"></view>-->
+<template name="orderList">
+    <block wx:for="{{orderList}}">
+        <template is="goodsItem" data="{{index:index,goods:item,myarray:myarray}}"/>
+    </block>
+</template>
+
 <template name="goodsItem">
-    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" bindtap="onClick">
+    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" >
             <view class="goods">
                 <view class="goods-tag ten" />
-                <image class="goods-image" src="{{goods.goods.imgUrl}}" />
+                <image class="goods-image" src="{{goods.goods.imgUrl}}" bindtap="onClick"/> 
                 <view class="desc-wrapper">
-                    <view class="goods-desc">{{goods.goods.name}}</view>
+                    <view class="goods-desc">{{goods.period}}期 下注 {{goods.setMore}} 元</view>
                 </view>
-                <view class="tips" style="background: red">{{goods.period}} 期开奖<span>{{goods.winner}}</span></view>
+            </view>
+            <view class="operating">
+                <view class="btn" bindtap="onDel2List" data-index="{{index}}" >移除清单</view>
+                <picker class="picker" bindchange="bindPickerChange" value="{{pickerindex}}" range="{{myarray}}" data-index="{{index}}">修改金额</picker>
             </view>
         </view>
 </template>
 
-<template name="goodsList">
-    <block wx:for="{{goodsList}}">
-        <template is="goodsItem" data="{{index:index,goods:item}}"/>
-    </block>
-</template>
