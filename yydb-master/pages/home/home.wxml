@@ -16,18 +16,6 @@
             </view>
         </view>
     </block>
-    <view class="sort-panel" style="position:{{sortPanelPos}};top:{{sortPanelTop}}px">
-        <view class="sort-item">人气</view>
-        <view class="sort-item">最新</view>
-        <view class="sort-item">进度</view>
-        <view class="sort-item comb on">
-            <view class="comb-text">总需人次</view>
-            <view class="comb-arrs down">
-                <image class="comb-arr-up" src=""></image>
-                <image class="comb-arr-down" src=""></image>
-            </view>
-        </view>
-    </view>
     <view class="goods-panel">
         <import src="tpl/goodsList.wxml"/>
         <template is="goodsList" data="{{goodsList:goodsList}}"/>

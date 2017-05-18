@@ -17,17 +17,23 @@ var app = getApp()
 					})
 				}
 			});
-			wx.request({
+            this.syncDataFromServer()
+        },
+        syncDataFromServer: function(){
+   			wx.request({
 				url: config.service.sync,
 				data: {
-					item: 7717 //sync the personal msg with database
+					code: 1001, //sync the personal msg with database
+//                    item: '{"period": {"$gt":100000}}'
+                    item: '{ "period": { "$gt": 100000 } } '
 				},
 				header: {
 					'Content-Type': 'application/json'
 				},
 				success: function (res) {
-					//console.log(res.data)
-                    app.setCusMsg(res.data) //set the local custom msg
+                    console.log("request "+config.service.sync+"SUCC")
+					console.log(res.data)
+                    //app.setCusMsg(res.data) //set the local custom msg
 				}
 			})
 			//console.log('onLoad');
@@ -98,7 +104,9 @@ var app = getApp()
 			//console.log("toFaq")
 		},
 		onAdd2List: function (e) {
-			var index = e.currentTarget.dataset.index //获得页面index
-            app.addOrderList(index)
+            this.syncDataFromServer()
+
+//			var index = e.currentTarget.dataset.index //获得页面index
+//            app.addOrderList(index)
 		}
 	})

@@ -314,7 +314,7 @@ App({
         }
     },getStorage(k){
         wx.getStorage({
-            key: label,
+            key: k,
             success: function (res) {
                 console.log(res.data)
             }
