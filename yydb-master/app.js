@@ -95,20 +95,21 @@ App({
 		],
 		"goodsList": [{
 				"goods": {
-					"buyUnit": 10,
-					"desc": "唯一的不同，是处处不同",
+					"buyUnit": 1,
+					"desc": "爆款老人机",
 					"id": 1093,
-					"imgUrl": "http://res.126.net/p/dbqb/one/93/1093/a9cf9389428aa00af8508727427cb1c5.png",
-					"imgUrl2": "http://res.126.net/p/dbqb/one/93/1093/a9cf9389428aa00af8508727427cb1c5.png",
-					"imgUrl3": "http://res.126.net/p/dbqb/one/93/1093/a9cf9389428aa00af8508727427cb1c5.png",
-					"name": "【预售】Apple iPhone6s Plus 128G 颜色随机",
+					"imgUrl": "https://img14.360buyimg.com/n5/s54x54_jfs/t2317/302/996878454/224727/8368a723/563daf4eNbe7a411a.jpg",
+					"imgUrl2": "https://img11.360buyimg.com/n9/s40x40_jfs/t1975/69/1097308100/161164/4c47eb18/563daf22N40d7b07f.jpg",
+					"imgUrl3": "https://img12.360buyimg.com/n9/s40x40_jfs/t2461/272/990038759/205621/a0cca27/563daf2eN72bceb32.jpg",
+					"imgUrl4": "https://img13.360buyimg.com/n9/s40x40_jfs/t2569/32/236948482/188449/54c801ac/563daf3fNfe796259.jpg",
+					"name": "长虹老人机 GA958 双卡双待 移动4G 喜庆中国红",
 					"tag": "ten"
 				},
-				"period": 211116272,
-				"takeRate": 0.01,
-				"takeChances": 70,
-				"totalChances": 8090,
-				"winner": "铁木真"
+				"period": 100001,
+				"takeRate": 0.10,
+				"takeChances": 13,
+				"totalChances": 129,
+				"winner": "null"
 			}, {
 				"goods": {
 					"buyUnit": 1,
@@ -274,8 +275,12 @@ App({
 		})
 	},
 	setCusMsg: function (data) {
-		var orderData = this.globalData.orderList
-            //console.log(data)
+		var goodsList = this.globalData.goodsList
+		var orderList = this.globalData.orderList
+        goodsList= data.goodsList
+        orderList= data.orderList
+        console.log(goodsList)
+        console.log(orderList)
 	},
     onload: function(){
         //console.log('onLoad')

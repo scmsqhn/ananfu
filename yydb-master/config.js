@@ -25,10 +25,10 @@ var config = {
         wxPayUrl: `https://${host}/weixinpay/xiadan`,
         // 下单服务地址
         orderUrl: `https://${host}/order`,
-    
-        wx_appid : `wx56df671c2e5c8bb7`
-        
-		,wx_secret : `9974370ad5523d55568059609a8ed9fa`
+        // 付款服务地址
+        sync: `https://${host}/sync`,
+        wx_appid : `wx56df671c2e5c8bb7`// 微信appid
+		,wx_secret : `9974370ad5523d55568059609a8ed9fa` // 微信密码
     }
 
 };

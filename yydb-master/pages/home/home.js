@@ -18,7 +18,7 @@ var app = getApp()
 				}
 			});
 			wx.request({
-				url: config.service.loginUrl,
+				url: config.service.sync,
 				data: {
 					item: 7717 //sync the personal msg with database
 				},
