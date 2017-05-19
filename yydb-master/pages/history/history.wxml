@@ -1,11 +1,11 @@
 <!-- shoppinglist.wxml -->
 
 <view class="goods-panel" bindtap="refresh">
-	<template is="orderList" data="{{orderList:orderList}}"/>
+	<template is="buyhistory" data="{{buyhistory:buyhistory}}"/>
 </view>
 
-<template name="orderList">
-    <block wx:for="{{orderList}}">
+<template name="buyhistory">
+    <block wx:for="{{buyhistory}}">
         <template is="goodsItem" data="{{index:index,goods:item}}"/>
     </block>
 </template>

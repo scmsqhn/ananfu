@@ -10,11 +10,11 @@
     <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" bindtap="onClick">
             <view class="goods">
                 <view class="goods-tag ten" />
-                <image class="goods-image" src="{{goods.goods.imgUrl}}" />
+                <image class="goods-image" src="{{goods.IMGURL}}" />
                 <view class="desc-wrapper">
-                    <view class="goods-desc">{{goods.goods.name}}</view>
+                    <view class="goods-desc">{{goods.NAME}}</view>
                 </view>
-                <view class="tips" ><span>{{goods.period}} 期 {{goods.winner}}</span></view>
+                <view class="tips" ><span>{{goods.PERIOD}} 期 {{goods.WINNER}}</span></view>
             </view>
         </view>
 </template>

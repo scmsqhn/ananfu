@@ -17,9 +17,9 @@
     <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" >
             <view class="goods">
                 <view class="goods-tag ten" />
-                <image class="goods-image" src="{{goods.goods.imgUrl}}" bindtap="onClick"/> 
+                <image class="goods-image" src="{{goods.IMGURL}}" bindtap="onClick"/> 
                 <view class="desc-wrapper">
-                    <view class="goods-desc">{{goods.period}}期 下注 {{goods.setMore}} 元</view>
+                    <view class="goods-desc">{{goods.PERIOD}}期 下注 {{goods.setMore}} 元</view>
                 </view>
             </view>
             <view class="operating">

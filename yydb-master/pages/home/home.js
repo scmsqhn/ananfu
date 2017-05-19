@@ -2,8 +2,26 @@ var config = require("../../config.js")
 var app = getApp()
 	Page({
 		data: app.getData(),
-		onReady: function () {},
-		onLoad: function () {
+   		refresh: function () {
+            this.setData({
+                goodsList: app.getData()["goodsList"]
+            })
+            console.log("\n开始刷新HOME列表 goodsList:", this.data.goodsList)
+		},onPullDownRefreash(){
+            console.log("onPullDownRefreash")
+          //  this.refresh()
+        },onShow(){
+            console.log("onShow")
+        },onHide(){
+            console.log("onHide")
+        },onReachBottom(){
+            console.log("onReachBottom")
+        },onUnload(){
+            console.log("onUnload")
+        },onReady: function () {
+            console.log("onReady")
+            this.refresh()
+        },onLoad: function () {
 			var me = this;
 			var animation = wx.createAnimation({
 					duration: 400,
@@ -18,6 +36,8 @@ var app = getApp()
 				}
 			});
             app.getUserInfo(console.log)
+            this.refresh()
+            console.log(this.data["goodsList"][0])
 //            this.syncDataFromServer()
         },
         syncDataFromServer: function(){
@@ -53,19 +73,16 @@ var app = getApp()
 			me.setData({
 				animationNotice: animation.export()
 			});
-
 			var noticeIdx = me.data.noticeIdx + 1;
 			if (noticeIdx == notices.length) {
 				noticeIdx = 0;
 			}
-
 			// 更换数据
 			setTimeout(function () {
 				me.setData({
 					noticeIdx: noticeIdx
 				});
 			}, 400);
-
 			// 启动下一次动画
 			setTimeout(function () {
 				me.startNotice();
@@ -73,7 +90,7 @@ var app = getApp()
 		},
 		onShow: function () {
 			this.startNotice();
-
+            this.refresh()
 		},
 		onToTop: function (e) {
 			if (e.detail.scrollTop >= 290) {
@@ -85,9 +102,13 @@ var app = getApp()
 					sortPanelPos: 'relative'
 				});
 			}
+            console.log("scrollView to onToTop")
+            this.refresh()
 			//console.log(e.detail.scrollTop)
-		},
-
+		},topViewTouch: function(){
+            console.log("topViewTouch")
+            this.refresh()
+        },
 		onClick: function (e) {
 			////console.log(e.srcElement.dataset.index)
 			var index = e.currentTarget.dataset.index //获得页面index

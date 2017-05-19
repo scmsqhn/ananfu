@@ -1,7 +1,8 @@
 var config = require("../../config.js")
 var app = getApp()
 Page({
-        data:{orderList: app.getData()["orderList"]},
+        //openid:  o44Xt0ESHNe6SSyVL9aP6B_noTdY
+        data:{buyhistory: app.getData().buyhistory},
         refresh: function(){
             console.log("refresh doing")
             var that= this
@@ -10,13 +11,15 @@ Page({
         },
         getList: function(that) {
 //            that.data.orderList= app.getData()["orderList"]
-            that.setData({orderList: app.getData()["orderList"]})
+            that.setData({buyhistory: app.getData().buyhistory})
         },
-		onReady: function () {},
+		onReady: function () {
+            
+        },
 		onLoad: function () {
             //console.log(app.getData()['orderList']);
 			var me = this;
-            me.data.orderList= app.getData()["orderList"]
+            me.data.buyhistory= app.getData().buyhistory
 			var animation = wx.createAnimation({
 					duration: 400,
 					timingFunction: 'ease-out',
@@ -33,7 +36,7 @@ Page({
 				}
 			});
 			//console.log('shoppingList.onLoad');
-			//console.log(this.data.orderList);
+			console.log("买家购物历史: "+this.data.buyhistory);
 		},
 		startNotice: function () {
 			var me = this;
