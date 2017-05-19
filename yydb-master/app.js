@@ -1,4 +1,6 @@
 //app.js
+var config= require('./config')
+
 App({
 	onLaunch: function () {
 		//调用API从本地缓存中获取数据
@@ -15,23 +17,86 @@ App({
             //console.log(orderList[i])
         }
     },
+    syncData: function(buyhistory){
+      console.log("syncData: function(buyhistory)="+buyhistory)
+      getApp().globalData.buyhistory= null
+      getApp().globalData.buyhistory= buyhistory
+    },
+    timeSatis:function(trigger){
+        if(Date.now()-timepre>trigger){
+            return true
+        }
+        return false
+    },
+    checkSession: function(){
+      if(timeSatis(60000)||!this.globalData.userInfo){
+        wx.checkSession({
+          success: function(){
+          //session 未过期，并且在本生命周期一直有效
+            console.log("session is inuse, OK")
+            syncData()
+          },
+          fail: function(){
+            //登录态过期
+            this.getUserInfo(console.log) //重新登录
+          }
+        })
+      }
+    },thirdLogin: function(code,encryptedData,iv,userinfo){
+        wx.showToast({
+            title: '正在登录...',
+            icon: 'loading',
+            duration: 10000
+          });
+        wx.request({
+            url: config.service.loginUrl,
+            data: {
+              code: code,
+              encryptedData: encryptedData,
+              iv: iv,
+              userinfo: userinfo
+            },
+            method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+            header: {
+              'content-type': 'application/json'
+            }, // 设置请求的 header
+            success: function (res) {
+              // success
+              wx.hideToast();
+              console.log('SUCC 服务器返回'+res.data);
+              if(200==res.statusCode){
+                  syncData(res.data)
+              }
+            },
+            fail: function (e) {
+              // fail
+              console.log('FAIL 服务器返回'+res.data);
+              wx.hideToast();
+            },
+            complete: function () {
+              console.log('COMPLETE '+res.data);
+            }
+          });
+    },
 	getUserInfo: function (cb) {
 		var that = this;
-		if (this.globalData.userInfo) {
-			typeof cb == "function" && cb(this.globalData.userInfo)
-		} else {
-			//调用登录接口
-			wx.login({
-				success: function () {
-					wx.getUserInfo({
-						success: function (res) {
-							that.globalData.userInfo = res.userInfo;
-							typeof cb == "function" && cb(that.globalData.userInfo)
-						}
-					})
-				}
-			});
-		}
+        //调用登录接口
+        wx.login({
+            success: function (e) {
+                console.log('wx.login(sunccess)')
+                var code= e.code
+                console.log("code="+code)
+                wx.getUserInfo({
+                    success: function (res) {
+                        console.log('wx.getUserInfo(sunccess)')
+                        console.log('wxgetUserInfo successd........');
+                        var encryptedData = encodeURIComponent(res.encryptedData);
+                        console.log("code=",code,"\ncncryptedData=", encryptedData, "\nres.iv=",res.iv, "\nres.userinfo=",res.userInfo)
+                        that.thirdLogin(code, encryptedData, res.iv, res.userInfo)//调用服务器api
+                    }
+                })
+            }
+        });
 	},
 	getImgUrls: function (index) {
 		var gData = this.globalData
@@ -49,6 +114,9 @@ App({
 		return imgUrls
 	},
 	globalData: {
+        openid:null,
+        isLogin:false,
+        buyhistory:null,
 		userInfo: null,
 		orderList: [],
 		payList: [{

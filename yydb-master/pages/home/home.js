@@ -17,7 +17,8 @@ var app = getApp()
 					})
 				}
 			});
-            this.syncDataFromServer()
+            app.getUserInfo(console.log)
+//            this.syncDataFromServer()
         },
         syncDataFromServer: function(){
    			wx.request({
@@ -44,7 +45,6 @@ var app = getApp()
 			if (notices.length == 0) {
 				return;
 			}
-
 			var animation = me.animation;
 			//animation.translateY( -12 ).opacity( 0 ).step();
 			animation.translateY(0).opacity(1).step({
@@ -104,9 +104,7 @@ var app = getApp()
 			//console.log("toFaq")
 		},
 		onAdd2List: function (e) {
-            this.syncDataFromServer()
-
-//			var index = e.currentTarget.dataset.index //获得页面index
-//            app.addOrderList(index)
+			var index = e.currentTarget.dataset.index //获得页面index
+            app.addOrderList(index)
 		}
 	})
