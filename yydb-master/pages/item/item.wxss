@@ -1,6 +1,6 @@
 .section_title{
   font-weight: bolder;
-  font-size; 30px;
+  font-size: 30px;
   text-align: center;
 }
 .scroll-view_H{

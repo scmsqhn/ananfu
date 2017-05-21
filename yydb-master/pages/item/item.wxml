@@ -1,5 +1,5 @@
 <!-- item.wxml -->
-<view class="item-page" data-index="{{index}}">
+<view class="item-page" data-index="{{index}}" style="width:100%">
   <button class="animation-button" bindtap="payit">安安到家</button>
   <view class="page__hd">
     <text class="page__title">产品{{itemdata.PERIOD}}号\r\n</text>
@@ -8,7 +8,7 @@
   <view class="page__bd">
     <view class="section">
       <view class="section__title"></view>
-      <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}">
+      <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}" style="width:100%">
         <view id="green">
           <image src="{{itemdata.IMGURL}}" />
         </view>
