@@ -129,6 +129,13 @@ var config = require("../../config.js")
 				//console.log(this.data.orderList)
 				app.delOrderList(index)
                 this.refresh()
+       			wx.showToast({
+    				title: '正在移出...',
+	    			icon: 'loading',
+		    		duration: 700
+		    	});
+
+                
 				//console.log(this.data.orderList)
 		},
 		makeOrder: function () {

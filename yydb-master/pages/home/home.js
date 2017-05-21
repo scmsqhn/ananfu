@@ -16,6 +16,8 @@ var app = getApp()
             console.log("onHide")
         },onReachBottom(){
             console.log("onReachBottom")
+        },onReachTop(){
+            console.log("onReachTop")
         },onUnload(){
             console.log("onUnload")
         },onReady: function () {
@@ -38,6 +40,7 @@ var app = getApp()
             app.getUserInfo(console.log)
             this.refresh()
             console.log(this.data["goodsList"][0])
+            console.log("this.syncDataFromServer()")
 //            this.syncDataFromServer()
         },
         syncDataFromServer: function(){
@@ -127,5 +130,11 @@ var app = getApp()
 		onAdd2List: function (e) {
 			var index = e.currentTarget.dataset.index //获得页面index
             app.addOrderList(index)
+  			wx.showToast({
+				title: '正在添加...',
+				icon: 'loading',
+				duration: 700
+			});
+
 		}
 	})

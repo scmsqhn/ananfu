@@ -410,15 +410,30 @@ var config = require('./config')
 		},
 		addOrderList: function (index) {
 				var item = this.globalData["goodsList"][index]
+				var goodsList = this.globalData["goodsList"]
                 console.log(item)
 				item["setMore"] = 1
 				console.log(item)
 				var orderList = this.globalData["orderList"]
 				var lenth = orderList.length
 				this.showOrderList("BEFORE ")
-				orderList.splice(lenth, 0, item)
-				this.showOrderList("AFTER")
+                for(var i in orderList){
+                    console.log(item["PERIOD"]+"=="+orderList[i]["PERIOD"])
+                    if(item["PERIOD"]==orderList[i]["PERIOD"]){
+                        var num= orderList[i]["setMore"]
+                        orderList[i]["setMore"]= num+1
+                        console.log("setMore= "+orderList[i]["setMore"])
+                        console.log("已经添加过该商品,setMore+1,return")
+                        return
+                    }
+                }
+                console.log("初次添加该商品")
+                orderList.splice(lenth, 0, item)
+                console.log(item)
+                this.showOrderList("AFTER")
 				this.setStorage("orderList", orderList)
+                console.log("return")
+                return
 		},
 		delOrderList: function (index) {
 			console.log(index)
