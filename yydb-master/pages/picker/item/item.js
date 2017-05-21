@@ -26,8 +26,8 @@ Page({
     for (var i = 0; i < order.length; ++i) {
       if (order[i] === this.data.toView) {
         this.setData({
-//          toView: order[i + 1],
-//          scrollTop: (i + 1) * 200
+          toView: order[i + 1],
+          scrollTop: (i + 1) * 200
         })
         break
       }
@@ -36,7 +36,7 @@ Page({
 
   tapMove: function(e) {
     this.setData({
-//      scrollTop: this.data.scrollTop + 10
+      scrollTop: this.data.scrollTop + 10
     })
   },
 

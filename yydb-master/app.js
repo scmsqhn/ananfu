@@ -6,7 +6,7 @@ var config = require('./config')
 			timepre: -1,
 			openid: null,
 			isLogin: false,
-			buyhistory: null,
+			buyhistory: [],
 			userInfo: null,
 			orderList: [],
 			payList: [{
@@ -217,10 +217,12 @@ var config = require('./config')
 					"_id": "591ea0b24470669ae0380d43",
 					"BUYUNITS": 1,
 					"DESC": "爆款老人机",
-					"IMGURL": "https://img14.360buyimg.com/n5/s54x54_jfs/t2317/302/996878454/224727/8368a723/563daf4eNbe7a411a.jpg",
-					"IMGURL2": "https://img11.360buyimg.com/n9/s40x40_jfs/t1975/69/1097308100/161164/4c47eb18/563daf22N40d7b07f.jpg",
-					"IMGURL3": "https://img12.360buyimg.com/n9/s40x40_jfs/t2461/272/990038759/205621/a0cca27/563daf2eN72bceb32.jpg",
-					"IMGURL4": "https://img13.360buyimg.com/n9/s40x40_jfs/t2569/32/236948482/188449/54c801ac/563daf3fNfe796259.jpg",
+					"IMGURL": "https://img.alicdn.com/imgextra/i3/1764632693/TB2W8vEqolnpuFjSZFjXXXTaVXa_!!1764632693.jpg",
+					"IMGURL2": "https://img.alicdn.com/imgextra/i3/1764632693/TB2hTz5qdRopuFjSZFtXXcanpXa_!!1764632693.jpg",
+					"IMGURL3": "https://img.alicdn.com/imgextra/i3/1764632693/TB2vSJAk1tTMeFjSZFOXXaTiVXa_!!1764632693.jpg",
+					"IMGURL4": "https://img.alicdn.com/imgextra/i4/1764632693/TB2PHi4XCB0XKJjSZFsXXaxfpXa_!!1764632693.jpg",
+                    "IMGURL5": "https://img.alicdn.com/imgextra/i4/1764632693/TB25Yi4XCB0XKJjSZFsXXaxfpXa_!!1764632693.jpg",
+                    "IMGURL6": "https://img.alicdn.com/imgextra/i4/1764632693/TB25Yi4XCB0XKJjSZFsXXaxfpXa_!!1764632693.jpg",
 					"NAME": "长虹老人机GA958双卡双待移动4G喜庆中国红",
 					"TAG": "null",
 					"PERIOD": 100001,
@@ -291,6 +293,7 @@ var config = require('./config')
 					success: function () {
 						//session 未过期，并且在本生命周期一直有效
 						console.log("session is inuse, OK")
+                        
 					},
 					fail: function () {
 						//登录态过期
@@ -366,16 +369,11 @@ var config = require('./config')
 		},
 		getImgUrls: function (index) {
 			var gData = this.globalData
-				//console.log("gData=" + gData)
-				var imgDatas = gData["goodsList"]
-				//console.log("[index]=" + index)
-				//console.log("imgDatas[index]=" + imgDatas[index])
-				//console.log("imgDatas[index].goods=" + imgDatas[index].goods)
-				//console.log("imgDatas[index].goods.imgUrl=" + imgDatas[index].goods.imgUrl)
-				var imgUrls = {
-				img1: (imgDatas[index].goods.imgUrl),
-				img2: (imgDatas[index].goods.imgUrl2),
-				img3: (imgDatas[index].goods.imgUrl3)
+    		var imgDatas = gData["goodsList"]
+			var imgUrls = {
+				img1: (imgDatas[index].IMGURL),
+				img2: (imgDatas[index].IMGURL2),
+				img3: (imgDatas[index].IMGURL3)
 			}
 			return imgUrls
 		},
@@ -404,6 +402,12 @@ var config = require('./config')
 				console.log(goodsList)
 				console.log(orderList)
 		},
+        getDatafromStor(){
+            this.globalData["goodsList"]= getStorage("goodsList")
+            this.globalData["orderList"]= getStorage("orderList")
+            this.globalData["buyhistory"]= getStorage("buyhistory")
+  
+        },
 		onload: function () {
 			console.log('onLoad')
 			//        getOrderData()
@@ -412,7 +416,6 @@ var config = require('./config')
 				var item = this.globalData["goodsList"][index]
 				var goodsList = this.globalData["goodsList"]
                 console.log(item)
-				item["setMore"] = 1
 				console.log(item)
 				var orderList = this.globalData["orderList"]
 				var lenth = orderList.length
@@ -424,15 +427,18 @@ var config = require('./config')
                         orderList[i]["setMore"]= num+1
                         console.log("setMore= "+orderList[i]["setMore"])
                         console.log("已经添加过该商品,setMore+1,return")
+                        this.setStorage("orderList", orderList)
                         return
                     }
                 }
                 console.log("初次添加该商品")
+   				item["setMore"] = 1
                 orderList.splice(lenth, 0, item)
                 console.log(item)
                 this.showOrderList("AFTER")
 				this.setStorage("orderList", orderList)
                 console.log("return")
+                this.setStorage("orderList", orderList)
                 return
 		},
 		delOrderList: function (index) {
@@ -440,6 +446,7 @@ var config = require('./config')
 			this.showOrderList("BEFORE")
 			this.globalData["orderList"].splice(index, 1)
 			this.showOrderList("AFTER")
+            app.setStorage("orderList", orderList)
 		},
 		setMore: function (index, tempset) {
 			console.log(index)
@@ -447,14 +454,14 @@ var config = require('./config')
 			console.log(this.globalData["orderList"][index])
 			this.globalData["orderList"][index]["setMore"] = tempset
 		},
-		setStorage(k, v) {
+		setStorage: function(k, v) {
 			try {
 				wx.setStorageSync(k, v)
 			} catch (e) {
 				console.log(e)
 			}
 		},
-		getStorage(k) {
+		getStorage: function(k) {
 			wx.getStorage({
 				key: k,
 				success: function (res) {

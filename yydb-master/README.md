@@ -315,4 +315,11 @@ buglist
  *    period:下单期数,...等其他订单信息
  *
  ***/
-4. 
+ 
+---
+# 22:13 2017/5/21
+1. 数据同步
+由数据库进行同步
+mongoimport -h localhost --port 27017 -d ananfu -c goodsList -f BUYUNITS,DESC,IMGURL,IMGURL2,IMGURL3,IMGURL4,NAME,TAG,PERIOD,TAKERATE,TAKECHANCES,TOTALCHANCES,WINNER --ignoreBlanks --file /data/release/node-weapp-demo/goodsList.csv --type csv --headerline --uperset
+
+ 

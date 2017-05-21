@@ -113,10 +113,11 @@ var app = getApp()
             this.refresh()
         },
 		onClick: function (e) {
-			////console.log(e.srcElement.dataset.index)
+            console.log(e.currentTarget.dataset.index)
+            console.log(e.currentTarget.dataset)
 			var index = e.currentTarget.dataset.index //获得页面index
 				//console.log("index=" + index)
-				//console.log("../item/item?index=" + index)
+				console.log("../item/item?index=" + index)
 				wx.navigateTo({
 					url: "../item/item?index=" + index
 				});
@@ -129,6 +130,7 @@ var app = getApp()
 		},
 		onAdd2List: function (e) {
 			var index = e.currentTarget.dataset.index //获得页面index
+            console.log("onAdd2List.index="+index)
             app.addOrderList(index)
   			wx.showToast({
 				title: '正在添加...',

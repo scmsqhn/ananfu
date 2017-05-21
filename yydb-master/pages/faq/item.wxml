@@ -1,0 +1,29 @@
+<!-- item.wxml -->
+  < view class = "item-page" style="width: 100%">
+     <button class="animation-button" bindtap="payit">安安到家</button>
+ 	 < view class = "page__hd">
+ 	 < text class = "page__title">产品{{index}}号\r\n</text>
+ 	 < text class = "page__desc">功能介绍</text>
+ 	 </view>
+ 	 < view class = "page__bd">
+ 	 < view class = "section">
+ 	 < view class = "section__title"></view>
+ 	 < scroll-view scroll-y = "true" bindscrolltoupper = "upper" bindscrolltolower = "lower" bindscroll = "scroll" scroll-into-view = "{{toView}}" scroll-top = "{{scrollTop}}">
+ 	 < view id = "green">
+ 	 < image  src = "../../resources/images/item{{index}}.png"/>
+ 	 </view>
+ 	 < view id = "red">
+ 	 < image  src = "../../resources/images/item{{index}}.png"/>
+ 	 </view>
+ 	 < view id = "yellow">  
+ 	 < image  src = "../../resources/images/item{{index}}.png"/>
+ 	 </view>
+ 	 < view id = "blue">  
+ 	 < image  src = "../../resources/images/item{{index}}.png"/>
+ 	 </view>
+ 	 </scroll-view>
+ 	 </view>
+ 	 </view>
+ 	</view>
+
+

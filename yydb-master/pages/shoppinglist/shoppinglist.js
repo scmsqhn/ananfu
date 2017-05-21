@@ -134,8 +134,6 @@ var config = require("../../config.js")
 	    			icon: 'loading',
 		    		duration: 700
 		    	});
-
-                
 				//console.log(this.data.orderList)
 		},
 		makeOrder: function () {
