@@ -107,11 +107,11 @@ var config = require("../../config.js")
 			//console.log(e.detail.scrollTop)
 		},
 		onClick: function (e) {
-			////console.log(e.srcElement.dataset.index)
+			console.log("e.currentTarget.dataset.index=", e.currentTarget.dataset.index)
 			var index = e.currentTarget.dataset.index //获得页面index
-				//console.log("index=" + index)
-				//console.log("../item/item?index=" + index)
-				wx.navigateTo({
+			console.log("index=" + index)
+			console.log("../item/item?index=" + index)
+            wx.navigateTo({
 					url: "../item/item?index=" + index
 				});
 		},

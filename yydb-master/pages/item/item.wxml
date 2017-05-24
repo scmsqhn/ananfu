@@ -1,27 +1,12 @@
 <!-- item.wxml -->
 <view class="item-page" data-index="{{index}}" style="width:100%">
+  <text class="page__title">产品{{itemdata.PERIOD}}号\r\n</text>
+  <text class="page__desc">{{itemdata.DESC}}</text>
+  <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}" >
+      <image src="{{itemdata.IMGURL}}" style="width: 100%"/>
+      <image src="{{itemdata.IMGURL2}}" style="width: 100%"/>
+      <image src="{{itemdata.IMGURL3}}" style="width: 100%"/>
+      <image src="{{itemdata.IMGURL4}}" style="width: 100%"/>
+  </scroll-view>
   <button class="animation-button" bindtap="payit">安安到家</button>
-  <view class="page__hd">
-    <text class="page__title">产品{{itemdata.PERIOD}}号\r\n</text>
-    <text class="page__desc">{{itemdata.DESC}}</text>
-  </view>
-  <view class="page__bd">
-    <view class="section">
-      <view class="section__title"></view>
-      <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}" style="width:100%">
-        <view id="green">
-          <image src="{{itemdata.IMGURL}}" />
-        </view>
-        <view id="red">
-          <image src="{{itemdata.IMGURL2}}" />
-        </view>
-        <view id="yellow">
-          <image src="{{itemdata.IMGURL3}}" />
-        </view>
-        <view id="blue">
-          <image src="{{itemdata.IMGURL4}}" />
-        </view>
-      </scroll-view>
-    </view>
-  </view>
-  </view>
+</view>

@@ -1,10 +1,10 @@
 <!-- shoppinglist.wxml -->
 
 <view class="goods-panel" bindtap="refresh">
+	<template is="orderList" data="{{orderList:orderList,point:point, myarray:myarray}}"/>
 	<view class = "item-page" style="width: 100%">
         <button class="animation-button" bindtap="payit">一键支付</button>
 	</view>
-	<template is="orderList" data="{{orderList:orderList,point:point, myarray:myarray}}"/>
 </view>
 
 <template name="orderList">

@@ -1,6 +1,5 @@
-<!-- shoppinglist.wxml -->
-
-<view class="goods-panel" bindtap="refresh">
+<!-- history.wxml -->
+<view class="goods-panel" bindtap="refresh" bindtap="onClick">
 	<template is="buyhistory" data="{{buyhistory:buyhistory}}"/>
 </view>
 
@@ -11,18 +10,17 @@
 </template>
 
 <template name="goodsItem">
-    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" >
+    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}">
             <view class="goods">
-                <view class="goods-tag ten" />
-                <image class="goods-image" src="{{goods.goods.imgUrl}}" bindtap="onClick"/>
+                <view class="goods-tag ten"/>
+                <image class="goods-image" src="{{goods.IMGURL2}}"/>
                 <view class="desc-wrapper">
-                    <view class="goods-desc">{{goods.name}}</view>
+                    <view class="goods-desc">{{goods.NAME}}</view>
                 </view>
             </view>
             <view class="operating">
-                <view class="tips">{{goods.period}}</view>
-                <view class="btn" data-index="{{index}}" >中奖</view>
+                <view class="tips">{{goods.PERIOD}}</view>
+                <view class="btn" data-index="{{index}}">中奖</view>
             </view>
         </view>
 </template>
-

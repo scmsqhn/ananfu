@@ -1,7 +1,31 @@
 var config = require("../../config.js")
 var app = getApp()
 	Page({
-		data: app.getData(),
+		data: {
+            goodsList: app.getData()["goodsList"],
+            imgUrls: app.getData()["imgUrls"],
+            notices: app.getData()["notices"],
+   			animationNotice: app.getData()["animationNotice"],
+            timepre: app.getData()["timepre"],
+			openid: app.getData()["openid"],
+			isLogin: app.getData()["isLogin"],
+			buyhistory: app.getData()["buyhistory"],
+			userInfo: app.getData()["userInfo"],
+			orderList: app.getData()["orderList"],
+            autoplay:true,
+            indicatorDots: true,
+			autoplay: true,
+			interval: 5000,
+			duration: 1000,
+			windowWidth: 320,
+			sortPanelTop: '290',
+			sortPanelDist: '0',
+			sortPanelPos: 'relative',
+			noticeIdx: 0,
+
+
+//            goodsList: app.getData()["goodsList"],
+        },
    		refresh: function () {
             this.setData({
                 goodsList: app.getData()["goodsList"]
@@ -22,11 +46,10 @@ var app = getApp()
             console.log("onUnload")
         },onReady: function () {
             console.log("onReady")
-            this.refresh()
         },onLoad: function () {
 			var me = this;
 			var animation = wx.createAnimation({
-					duration: 400,
+					duration: 1000,
 					timingFunction: 'ease-out',
 				});
 			me.animation = animation;
@@ -37,10 +60,11 @@ var app = getApp()
 					})
 				}
 			});
-            app.getUserInfo(console.log)
+//            app.getUserInfo(console.log)
+            console.log('onLoad refresh')
             this.refresh()
-            console.log(this.data["goodsList"][0])
-            console.log("this.syncDataFromServer()")
+            console.log('home: 同步以后goodsList数据= ', this.data.goodsList)
+
 //            this.syncDataFromServer()
         },
         syncDataFromServer: function(){
@@ -93,7 +117,6 @@ var app = getApp()
 		},
 		onShow: function () {
 			this.startNotice();
-            this.refresh()
 		},
 		onToTop: function (e) {
 			if (e.detail.scrollTop >= 290) {

@@ -322,4 +322,15 @@ buglist
 由数据库进行同步
 mongoimport -h localhost --port 27017 -d ananfu -c goodsList -f BUYUNITS,DESC,IMGURL,IMGURL2,IMGURL3,IMGURL4,NAME,TAG,PERIOD,TAKERATE,TAKECHANCES,TOTALCHANCES,WINNER --ignoreBlanks --file /data/release/node-weapp-demo/goodsList.csv --type csv --headerline --uperset
 
- 
+---
+# 14:40 2017/5/24
+一定要使用 setData 设置参数
+同步购买历史数据
+buyhistory 入库
+
+放图
+手机充值卡
+http://img.hb.aicdn.com/cc60479c93ef85546cf3d91c85564af9f3ac1319395abc-Y6JvIr_fw658
+http://img.hb.aicdn.com/9bbbcb0762797b1979548b774363d83973a9e77f13e2df-47JCF8_fw658
+http://img.hb.aicdn.com/b605945fcab1f0d4b7c73913b1a4b6e2e9d7f5fe29220-abns54_fw658
+http://img.hb.aicdn.com/eab754b3270f2a357dc459521cb779dcd1482e84976e-IBE8Od_fw658

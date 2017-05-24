@@ -6,7 +6,7 @@ var config = require('./config')
 			timepre: -1,
 			openid: null,
 			isLogin: false,
-			buyhistory: [],
+			buyhistory: null,
 			userInfo: null,
 			orderList: [],
 			payList: [{
@@ -212,8 +212,8 @@ var config = require('./config')
 					"winner": "spider-man"
 				}
 			],
-            "goodsList1":[],
-			"goodsList": [{
+            "goodsList":null,
+			"goodsList1": [{
 					"_id": "591ea0b24470669ae0380d43",
 					"BUYUNITS": 1,
 					"DESC": "爆款老人机",
@@ -275,8 +275,8 @@ var config = require('./config')
 		},
 		syncData: function (datain) {
 			console.log("syncData: function(buyhistory)=" + datain)
-			this.globalData["goodsList"] = datain
-			console.log('this.globalData["goodsList"]', this.globalData["goodsList"])
+			this.globalData["buyhistory"] = datain
+			console.log('app.syncData 同步后 buyhistory 数据= ', this.globalData["buyhistory"])
 		},
 		timeSatis: function (trigger) {
 			if (Date.now() - this.globalData.timepre > trigger) {
@@ -292,11 +292,11 @@ var config = require('./config')
 				wx.checkSession({
 					success: function () {
 						//session 未过期，并且在本生命周期一直有效
-						console.log("session is inuse, OK")
-                        
+						console.log("登陆未过期,可以使用,session is inuse, OK")
 					},
 					fail: function () {
 						//登录态过期
+						console.log("登陆过期,重新登陆")
 						this.getUserInfo(console.log) //重新登录
 					}
 				})
@@ -322,12 +322,12 @@ var config = require('./config')
 				}, // 设置请求的 header
 				success: function (res) {
 					// success
-					wx.hideToast();
 					console.log('SUCC 服务器返回' + res.data);
 					if (200 == res.statusCode) {
 						console.log("res.data= ", res.data)
 						getApp().syncData(res.data)
 						getApp().setTimePre()
+       					wx.hideToast();
 					}
 				},
 				fail: function (e) {
@@ -336,16 +336,17 @@ var config = require('./config')
 					wx.hideToast();
 				},
 				complete: function () {
-					console.log('COMPLETE ');
+					console.log('三方服务器登陆完毕,COMPLETE ');
 				}
 			});
 		},
 		onLaunch: function () {
 			//调用API从本地缓存中获取数据
 			var logs = wx.getStorageSync('logs') || []
-				logs.unshift(Date.now())
-				wx.setStorageSync('logs', logs)
-				this.checkSession()
+            logs.unshift(Date.now())
+            wx.setStorageSync('logs', logs)
+            this.getGoodsList()
+            this.checkSession()
 		},
 		getUserInfo: function (cb) {
 			var that = this;
@@ -381,6 +382,10 @@ var config = require('./config')
 			var gData = this.globalData;
 			return gData
 		},
+		getHistoryData: function () {
+			var gData = this.globalData.buyhistory;
+			return gData
+		},
 		getOrderData: function () {
 			var me = this
 				var orderData = me.globalData.orderData
@@ -406,7 +411,6 @@ var config = require('./config')
             this.globalData["goodsList"]= getStorage("goodsList")
             this.globalData["orderList"]= getStorage("orderList")
             this.globalData["buyhistory"]= getStorage("buyhistory")
-  
         },
 		onload: function () {
 			console.log('onLoad')
@@ -468,5 +472,69 @@ var config = require('./config')
 					console.log(res.data)
 				}
 			})
-		}
+		},
+   		getGoodsList: function() {
+            console.log("app.getGoodsList==")
+            var me= this
+			wx.request({
+				url: config.service.sync,
+				data: {
+					code: 1001,
+					data: "{}"
+				},
+				method: 'GET',
+				header: {
+					'content-type': 'application/json'
+				}, 
+				success: function (res) {
+					console.log('SUCC GOODSLIST 服务器返回' + res.data);
+					if (200 == res.statusCode) { 
+						console.log("读取下单记录返回res.data= ", res.data)
+						me.globalData["goodsList"]= res.data
+						getApp().setTimePre()
+					}
+				},
+				fail: function (e) {
+					// fail
+					console.log('FAIL 服务器返回错误: ', e);
+					wx.hideToast( );
+				},
+				complete: function ( ) {
+					console.log('三方服务器登陆完毕,COMPLETE ');
+                    console.log('获得购买历史: ', me.globalData.buyhistory)
+				}
+			});
+		},
+   		getBuyHistory: function() {
+            console.log("app.getBuyHistory")
+            var me= this
+			wx.request({
+				url: config.service.sync,
+				data: {
+					code: 1003,
+					openid: "o44Xt0ESHNe6SSyVL9aP6B_noTdY"
+				},
+				method: 'GET',
+				header: {
+					'content-type': 'application/json'
+				}, 
+				success: function (res) {
+					console.log('SUCC 购买历史服务器返回' + res.data);
+					if (200 == res.statusCode) { 
+						console.log("读取下单记录返回res.data= ", res.data)
+						me.globalData.buyhistory= res.data
+						getApp().setTimePre()
+					}
+				},
+				fail: function (e) {
+					// fail
+					console.log('FAIL 服务器返回错误: ', e);
+					wx.hideToast( );
+				},
+				complete: function ( ) {
+					console.log('三方服务器登陆完毕,COMPLETE ');
+                    console.log('获得购买历史: ', me.globalData.buyhistory)
+				}
+			});
+		},
 	})
