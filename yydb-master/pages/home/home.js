@@ -3,6 +3,7 @@ var app = getApp()
 	Page({
 		data: {
             goodsList: app.getData()["goodsList"],
+            globalData: app.getData(),
             imgUrls: app.getData()["imgUrls"],
             notices: app.getData()["notices"],
    			animationNotice: app.getData()["animationNotice"],
@@ -22,15 +23,14 @@ var app = getApp()
 			sortPanelDist: '0',
 			sortPanelPos: 'relative',
 			noticeIdx: 0,
-
-
 //            goodsList: app.getData()["goodsList"],
         },
    		refresh: function () {
             this.setData({
-                goodsList: app.getData()["goodsList"]
+                goodsList: app.getData().goodsList
             })
-            console.log("\n开始刷新HOME列表 goodsList:", this.data.goodsList)
+            console.log("\nFROM 开始刷新HOME列表 goodsList:", app.getData())
+            console.log("\nTO 开始刷新HOME列表 goodsList:", this.data.goodsList)
 		},onPullDownRefreash(){
             console.log("onPullDownRefreash")
           //  this.refresh()
@@ -56,7 +56,8 @@ var app = getApp()
 			wx.getSystemInfo({
 				success: function (res) {
 					me.setData({
-						windowWidth: res.windowWidth
+						windowWidth: res.windowWidth,
+						windowHeight: res.windowHeight
 					})
 				}
 			});
@@ -64,7 +65,6 @@ var app = getApp()
             console.log('onLoad refresh')
             this.refresh()
             console.log('home: 同步以后goodsList数据= ', this.data.goodsList)
-
 //            this.syncDataFromServer()
         },
         syncDataFromServer: function(){
@@ -133,9 +133,7 @@ var app = getApp()
 			//console.log(e.detail.scrollTop)
 		},topViewTouch: function(){
             console.log("topViewTouch")
-            this.refresh()
-        },
-		onClick: function (e) {
+        },onClick: function (e) {
             console.log(e.currentTarget.dataset.index)
             console.log(e.currentTarget.dataset)
 			var index = e.currentTarget.dataset.index //获得页面index
