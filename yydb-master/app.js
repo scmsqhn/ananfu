@@ -51,7 +51,9 @@ var config = require('./config')
 					"time": "12分钟前"
 				}
 			],
-			goodsList: [{
+            goodsList: [
+            ],
+			goodsList1: [{
 					"_id": 'ObjectId("59254fa234426eac99fe4eba")',
 					"BUYUNITS": 1,
 					"DESC": "爆款老人机",
@@ -139,16 +141,18 @@ var config = require('./config')
 			this.globalData.timepre = Date.now()
 		},
 		checkSession: function () {
+            var me= this
 			if (this.timeSatis(60000) || !this.globalData.userInfo) {
 				wx.checkSession({
 					success: function () {
 						//session 未过期，并且在本生命周期一直有效
 						console.log("登陆未过期,可以使用,session is inuse, OK")
+						me.getUserInfo(console.log) //重新登录
 					},
 					fail: function () {
 						//登录态过期
 						console.log("登陆过期,重新登陆")
-						this.getUserInfo(console.log) //重新登录
+						me.getUserInfo(console.log) //重新登录
 					}
 				})
 			}
@@ -301,7 +305,6 @@ var config = require('./config')
 				orderList.splice(lenth, 0, item)
 				console.log(item)
 				this.showOrderList("AFTER")
-				this.setStorage("orderList", orderList)
 				console.log("return")
 				this.setStorage("orderList", orderList)
 				return
@@ -352,7 +355,7 @@ var config = require('./config')
 						if (200 == res.statusCode) {
 							console.log("读取下单记录返回res.data= ", res.data)
 							me.globalData["goodsList"] = res.data
-								getApp().setTimePre()
+                            getApp().setTimePre()
 						}
 					},
 					fail: function (e) {
@@ -389,7 +392,6 @@ var config = require('./config')
 						}
 					},
 					fail: function (e) {
-						// fail
 						console.log('FAIL 服务器返回错误: ', e);
 						wx.hideToast();
 					},

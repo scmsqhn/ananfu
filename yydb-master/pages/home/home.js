@@ -23,6 +23,7 @@ var app = getApp()
 			sortPanelDist: '0',
 			sortPanelPos: 'relative',
 			noticeIdx: 0,
+            takerate:null,
 //            goodsList: app.getData()["goodsList"],
         },
    		refresh: function () {
@@ -39,6 +40,7 @@ var app = getApp()
         },onHide(){
             console.log("onHide")
         },onReachBottom(){
+            this.refreshRate()
             console.log("onReachBottom")
         },onReachTop(){
             console.log("onReachTop")
@@ -63,9 +65,34 @@ var app = getApp()
 			});
 //            app.getUserInfo(console.log)
             console.log('onLoad refresh')
-            this.refresh()
+//            this.refresh()
+            this.refreshRate()
+            console.log("onReachBottom")
             console.log('home: 同步以后goodsList数据= ', this.data.goodsList)
 //            this.syncDataFromServer()
+        },refreshRate: function(){
+            //获得当前Rate
+            var me= this
+   			wx.request({
+				url: config.service.sync,
+				data: {
+					code: 1005, //同步夺宝进度
+                    period: 100001
+				},
+				header: {
+					'Content-Type': 'application/json'
+				},
+				success: function (res) {
+                    console.log("返回TAKERATE=  ", res.data, "SUCC")
+                    var i= 0
+                    me.setData({
+                      goodsList: res.data
+                    })
+                    console.log("更新TAKERATE,重置goodsList: ", me.data.goodsList)
+                    //app.setCusMsg(res.data) //set the local custom msg
+				}
+			})
+			//console.log('onLoad');
         },
         syncDataFromServer: function(){
    			wx.request({

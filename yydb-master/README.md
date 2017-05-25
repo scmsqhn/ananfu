@@ -334,3 +334,21 @@ http://img.hb.aicdn.com/cc60479c93ef85546cf3d91c85564af9f3ac1319395abc-Y6JvIr_fw
 http://img.hb.aicdn.com/9bbbcb0762797b1979548b774363d83973a9e77f13e2df-47JCF8_fw658
 http://img.hb.aicdn.com/b605945fcab1f0d4b7c73913b1a4b6e2e9d7f5fe29220-abns54_fw658
 http://img.hb.aicdn.com/eab754b3270f2a357dc459521cb779dcd1482e84976e-IBE8Od_fw658
+
+---
+# 10:43 2017/5/25
+1. 完成登录用户资料存取
+    以为openid为唯一标签
+2. 
+抬头位置图片内容:
+
+1 一元夺宝招牌
+2 公平公正公开透明宣传图语
+3 商品宣传图片
+4 中奖分享,宣传图片
+5 卖点宣传
+  .1 全过程透明
+  .2 即时开奖,通知中奖结果
+  .3 开奖条件不满足,3个工作日内退款
+  .4 微信号公开,确保开奖真实
+  .5 所有奖品从京东采购,物流品质有保障

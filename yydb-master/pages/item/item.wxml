@@ -1,7 +1,8 @@
 <!-- item.wxml -->
 <view class="item-page" data-index="{{index}}" style="width:100%">
-  <text class="page__title">产品{{itemdata.PERIOD}}号\r\n</text>
-  <text class="page__desc">{{itemdata.DESC}}</text>
+  <text class="page__title" style="color:#3273c3">宝贝 {{itemdata.PERIOD}} 期\r\n</text>
+  <text class="page__desc" style="color:#999999">{{itemdata.DESC}}</text>
+
   <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}" >
       <image src="{{itemdata.IMGURL}}" style="width: 100%"/>
       <image src="{{itemdata.IMGURL2}}" style="width: 100%"/>
