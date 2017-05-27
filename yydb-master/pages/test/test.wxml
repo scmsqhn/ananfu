@@ -1,0 +1,30 @@
+<button bindtap="choosearea" type="primary">选择地址</button>
+<view class="txt">{{address||'您尚未选择送货地址哟'}}</view>
+<view class="code">{{selectedCode}}</view>
+<include src="../../selectarea/selectarea.wxml" />
+
+<!--<include src="../../picker/picker.wxml" />-->
+<view class="page-section inputtext">
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" auto-focus placeholder="{{name}}" bindinput="inname"/>
+    </view>
+  </view>
+</view>
+<view class="page-section inputtext">
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" auto-focus placeholder="{{place}}" bindinput="inplace"/>
+    </view>
+  </view>
+</view>
+<view class="page-section inputtext">
+  <view class="weui-cells__title"></view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" auto-focus placeholder="{{phonenum}}" bindinput="inmobile"/>
+    </view>
+  </view>
+</view>

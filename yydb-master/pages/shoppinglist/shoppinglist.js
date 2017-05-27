@@ -144,15 +144,27 @@ var config = require("../../config.js")
 		},
 		payit: function (e) {
 			//var order = this.makeOrder()
-			//console.log("start payit\r\n")
+			console.log("start payit\r\n")
 			var that = this;
-			wx.login({
-				success: function (res) {
-					//console.log('for pay purpose ,login success\r\n')
-					//console.log(that.data.orderList)
-					that.getOpenId(res.code, that.data.orderList);
-				}
-			});
+            wx.getStorage({
+                key: 'address',
+                success: function(){
+                    console.log('success ready 2 login')
+        			wx.login({
+		    		  success: function (res) {
+					  console.log('for pay purpose ,login success\r\n')
+					  //console.log(that.data.orderList)
+					  that.getOpenId(res.code, that.data.orderList);
+			    	  }
+			        });
+                },
+                fail: function(){
+                    console.log("\n未找到内容Storage, 进入地址设置;")
+                    wx.navigateTo({
+					  url: "../test/test"
+				    });
+                }
+            })
 		},
 		//获取openid
 		getOpenId: function (code, order) {
@@ -174,7 +186,7 @@ var config = require("../../config.js")
 					//console.log("return is\r\n")
 					//console.log("statusCode="+res.statusCode)
 					//console.log(res.data)
-					//console.log('get opendId succ/r/n')
+					console.log('get opendId succ/r/n')
 					var openId = res.data.openid;
 					//console.log('make the order with th opendId we got right now/r/n')
 					//					that.xiadan(openId);

@@ -83,4 +83,8 @@ Page({
 			//	url: "../item/item?index=" + index
 			//	});
 		},
+        gototest(){
+            console.log('修改收货地址')
+            wx.navigateTo({url: "../test/test"});
+        },
 	})

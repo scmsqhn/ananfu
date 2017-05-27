@@ -2,11 +2,13 @@
   "pages": [
     "pages/home/home",
     "pages/item/item",
-    "pages/faq/faq"
-    ,"pages/bingo/bingo"
-	,"pages/shoppinglist/shoppinglist"
-	,"pages/history/history"
-    ,"pages/picker/picker"
+    "pages/faq/faq",
+    "pages/bingo/bingo",
+	"pages/shoppinglist/shoppinglist",
+	"pages/history/history",
+    "pages/picker/picker",
+    "pages/paypicker/paypicker",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

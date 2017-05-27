@@ -5,7 +5,7 @@
 
   <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}" >
       <image src="{{itemdata.IMGURL}}" style="width: 100%"/>
-      <image src="{{itemdata.IMGURL2}}" style="width: 100%"/>
+       <image src="{{itemdata.IMGURL2}}" style="width: 100%"/>
       <image src="{{itemdata.IMGURL3}}" style="width: 100%"/>
       <image src="{{itemdata.IMGURL4}}" style="width: 100%"/>
   </scroll-view>
