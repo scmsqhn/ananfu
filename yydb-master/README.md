@@ -320,7 +320,7 @@ buglist
 # 22:13 2017/5/21
 1. 数据同步
 由数据库进行同步
-mongoimport -h localhost --port 27017 -d ananfu -c goodsList -f BUYUNITS,DESC,IMGURL,IMGURL2,IMGURL3,IMGURL4,NAME,TAG,PERIOD,TAKERATE,TAKECHANCES,TOTALCHANCES,WINNER --ignoreBlanks --file /data/release/node-weapp-demo/goodsList.csv --type csv --headerline --uperset
+mongoimport -h localhost --port 27017 -d ananfu -c goodsList -f BUYUNITS,DESC,IMGURL,IMGURL2,IMGURL3,IMGURL4,NAME,TAG,PERIOD,TAKERATE,TAKECHANCES,TOTALCHANCES,WINNER --ignoreBlanks --file /data/release/node-weapp-demo/goodsList.csv --type csv --headerline --upsert
 
 ---
 # 14:40 2017/5/24
@@ -357,3 +357,9 @@ http://img.hb.aicdn.com/eab754b3270f2a357dc459521cb779dcd1482e84976e-IBE8Od_fw65
 # 14:04 2017/5/26  
 7559016582106210422085153
 招商银行深圳分行高新园支行
+
+---
+# 11:53 2017/6/1
+lanrenzhichuang@163.com
+https://mp.weixin.qq.com/
+PS:LANREN12345

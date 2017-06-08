@@ -27,12 +27,11 @@ var config = {
         orderUrl: `https://${host}/order`,
         // 付款服务地址
         sync: `https://${host}/sync`,
-        wx_appid : `wx56df671c2e5c8bb7`// 微信appid
-		,wx_secret : `9974370ad5523d55568059609a8ed9fa`
-        ,addr: `https://${host}/addr`,
-        // 微信密码
+        wx_appid : `wx56df671c2e5c8bb7`,// 微信appid
+		wx_secret : `9974370ad5523d55568059609a8ed9fa`,
+        addrUrl: `https://${host}/addr`,
+        fileUrl: `https://${host}/file`,
     }
-
 };
 
 module.exports = config;
