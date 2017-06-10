@@ -147,6 +147,26 @@ var config = require("../../config.js")
 			console.log("start payit\r\n")
 			var that = this;
             wx.getStorage({
+              key: "code",
+              success: function(res){
+                console.log("Storage 取code =", JSON.stringify(res.data))    
+                var code = res.data
+                var orderList = getApp().getData('orderList')
+                that.getOpenId(code, orderList);
+              },
+              fail: function(err){
+                console.log("err: ", err)    
+                console.log('取code失败,重新获得用户code')
+              }
+            });
+
+
+
+            
+            
+            /**
+            // 查询当前收货地址,是否确认
+            wx.getStorage({
                 key: 'address',
                 success: function(){
                     console.log('success ready 2 login')
@@ -164,7 +184,7 @@ var config = require("../../config.js")
 					  url: "../test/test"
 				    });
                 }
-            })
+            })*/
 		},
 		//获取openid
 		getOpenId: function (code, order) {

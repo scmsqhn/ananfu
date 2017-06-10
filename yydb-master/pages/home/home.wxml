@@ -12,7 +12,7 @@
         <view class="notice-panel">
             <image class="notice-image" src="../../resources/images/ic_notice.png" />
             <view class="notice-message" animation="{{animationNotice}}" style="opacity:{{noticeIdx>=0}};">
-                <span style="color:#999999">恭喜</span><span style="color:#3273c3">{{notices[noticeIdx].name}}</span><span style="color:#999999">{{notices[noticeIdx].time}}</span>{{notices[noticeIdx].goods}}
+                <span style="color:#999999">恭喜</span><span style="color:#3273c3">{{notices[noticeIdx].name}}</span><span style="color:#999999">{{notices[noticeIdx].time}}前,夺得</span>{{notices[noticeIdx].goods}}
             </view>
         </view>
     </block>

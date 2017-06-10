@@ -27,10 +27,14 @@ var config = {
         orderUrl: `https://${host}/order`,
         // 付款服务地址
         sync: `https://${host}/sync`,
-        wx_appid : `wx56df671c2e5c8bb7`,// 微信appid
-		wx_secret : `9974370ad5523d55568059609a8ed9fa`,
+        wx_appid : `wxa6d9e2698142dcab`,
+        wx_secret : `d75c90ba2602cf610cf2b39f4a39c4fe`,
         addrUrl: `https://${host}/addr`,
         fileUrl: `https://${host}/file`,
+        /**
+        wx_appid : `wx56df671c2e5c8bb7`,// 微信appid
+		wx_secret : `9974370ad5523d55568059609a8ed9fa`,
+*/
     }
 };
 

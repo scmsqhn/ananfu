@@ -3,7 +3,7 @@
 <view class="goods-panel" bindtap="refresh">
 	<template is="orderList" data="{{orderList:orderList,point:point, myarray:myarray}}"/>
 	<view class = "item-page" style="width: 100%">
-        <button class="animation-button" bindtap="payit">一键支付</button>
+        <button class="animation-button" style="background-color: #db3652" bindtap="payit">付款</button>
 	</view>
 </view>
 

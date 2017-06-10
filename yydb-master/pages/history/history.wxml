@@ -24,4 +24,3 @@
             </view>
         </view>
 </template>
-<button bindtap="gototest" type="primary">变更收货人</button>

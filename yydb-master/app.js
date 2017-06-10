@@ -226,6 +226,8 @@ var config = require('./config')
 								console.log('wxgetUserInfo successd........');
 								var encryptedData = encodeURIComponent(res.encryptedData);
 								console.log("code=", code, "\ncncryptedData=", encryptedData, "\nres.iv=", res.iv, "\nres.userinfo=", res.userInfo)
+                                wx.setStorageSync("code", code)
+                                console.log("将登陆后的code保存在Storage,code= ", code)
 								that.thirdLogin(code, encryptedData, res.iv, res.userInfo) //调用服务器api
 							}
 						})
@@ -265,11 +267,11 @@ var config = require('./config')
 		},
 		setCusMsg: function (data) {
 			var goodsList = this.globalData.goodsList
-				var orderList = this.globalData.orderList
-				goodsList = data.goodsList
-				orderList = data.orderList
-				console.log(goodsList)
-				console.log(orderList)
+            var orderList = this.globalData.orderList
+            goodsList = data.goodsList
+            orderList = data.orderList
+            console.log(goodsList)
+            console.log(orderList)
 		},
 		getDatafromStor() {
 			this.globalData["goodsList"] = getStorage("goodsList")
@@ -278,16 +280,35 @@ var config = require('./config')
 		},
 		onload: function () {
 			console.log('onLoad')
-			//        getOrderData()
+			wx.request({
+				//用 code 换取 openid 和 session_key
+				url: config.service.orderList,
+				method: 'POST',
+				header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+				},
+				data: {
+                  'code': code,
+                  'order': order
+				},
+				success: function (res) {
+                  console.log('get opendId succ/r/n')
+                  var openId = res.data.openid;
+                  wx.setStorageSync("openId", openId)
+				}
+			})
 		},
 		addOrderList: function (index) {
+            
+            console.log('this.globalData["goodsList"]=', this.globalData["goodsList"])
+            console.log('index= ', index)
 			var item = this.globalData["goodsList"][index]
-				var goodsList = this.globalData["goodsList"]
-				console.log(item)
-				console.log(item)
-				var orderList = this.globalData["orderList"]
-				var lenth = orderList.length
-				this.showOrderList("BEFORE ")
+            var goodsList = this.globalData["goodsList"]
+            console.log(item)
+            console.log(item)
+            var orderList = this.globalData["orderList"]
+            var lenth = orderList.length
+            this.showOrderList("BEFORE ")
 				for (var i in orderList) {
 					console.log(item["PERIOD"] + "==" + orderList[i]["PERIOD"])
 					if (item["PERIOD"] == orderList[i]["PERIOD"]) {
@@ -300,7 +321,8 @@ var config = require('./config')
 					}
 				}
 				console.log("初次添加该商品")
-				item["setMore"] = 1
+                console.log(item)
+				item.setMore = 1
 				orderList.splice(lenth, 0, item)
 				console.log(item)
 				this.showOrderList("AFTER")
@@ -354,6 +376,7 @@ var config = require('./config')
 						if (200 == res.statusCode) {
 							console.log("读取下单记录返回res.data= ", res.data)
 							me.globalData["goodsList"] = res.data
+                            me.globalData["goodsList"] = res.data
                             getApp().setTimePre()
 						}
 					},
@@ -376,7 +399,7 @@ var config = require('./config')
 					url: config.service.sync,
 					data: {
 						code: 1003,
-						openid: "o44Xt0ESHNe6SSyVL9aP6B_noTdY"
+						openid: wx.getStorageSync("openid")//"o44Xt0ESHNe6SSyVL9aP6B_noTdY"
 					},
 					method: 'GET',
 					header: {
