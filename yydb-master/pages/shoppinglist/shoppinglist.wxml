@@ -14,10 +14,10 @@
 </template>
 
 <template name="goodsItem">
-    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}" >
+    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}">
             <view class="goods">
                 <view class="goods-tag ten" />
-                <image class="goods-image" src="{{goods.IMGURL}}" bindtap="onClick"/> 
+                <image class="goods-image" src="{{goods.IMGURL}}" bindtap="onClick"/>
                 <view class="desc-wrapper">
                     <view class="goods-desc">{{goods.PERIOD}}期 下注 {{goods.setMore}} 元</view>
                 </view>
@@ -28,4 +28,3 @@
             </view>
         </view>
 </template>
-

@@ -9,9 +9,9 @@
                 </view>
             </view>
             <view class="operating">
-                <view class="tips">揭晓进度<span>{{goods.TAKERATE * 100}}%</span></view>
+                <view class="tips">揭晓进度<span>{{goods.TAKERATE}}%</span></view>
                 <view class="progress" style="width: calc(100% - 76px);"></view>
-                <view class="progress-take" style="width: calc((100% - 76px) * {{goods.TAKERATE}} );"></view>
+                <view class="progress-take" style="width: calc((100% - 76px) *0.01 * {{goods.TAKERATE}} );"></view>
                 <view class="btn" bindtap="onAdd2List" data-index="{{index}}">加入清单</view>
             </view>
         </view>

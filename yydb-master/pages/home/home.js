@@ -2,7 +2,7 @@ var config = require("../../config.js")
 var app = getApp()
 	Page({
 		data: {
-            goodsList: app.getData()["goodsList"],
+            goodsList: null,
             globalData: app.getData(),
             imgUrls: app.getData()["imgUrls"],
             notices: app.getData()["notices"],
@@ -27,9 +27,7 @@ var app = getApp()
 //            goodsList: app.getData()["goodsList"],
         },
    		refresh: function () {
-            this.setData({
-                goodsList: app.getData().goodsList
-            })
+            //this.setData({goodsList: app.getData().goodsList})
             console.log("\nFROM 开始刷新HOME列表 goodsList:", app.getData())
             console.log("\nTO 开始刷新HOME列表 goodsList:", this.data.goodsList)
 		},onPullDownRefreash(){
@@ -50,6 +48,7 @@ var app = getApp()
             console.log("onReady")
         },onLoad: function () {
 			var me = this;
+            me.setData({goodsList : app.getData().goodsList});
 			var animation = wx.createAnimation({
 					duration: 1000,
 					timingFunction: 'ease-out',
@@ -67,7 +66,6 @@ var app = getApp()
             console.log('onLoad refresh')
 //            this.refresh()
             this.refreshRate()
-            console.log("onReachBottom")
             console.log('home: 同步以后goodsList数据= ', this.data.goodsList)
 //            this.syncDataFromServer()
         },refreshRate: function(){
@@ -84,11 +82,16 @@ var app = getApp()
 				},
 				success: function (res) {
                     console.log("返回TAKERATE=  ", res.data, "SUCC")
-                    var i= 0
-                    me.setData({
-                      goodsList: res.data
-                    })
-                    console.log("更新TAKERATE,重置goodsList: ", me.data.goodsList)
+                    for (var i=0; i< res.data.length; i++){
+                      //注意:item须先定义,在填值,否则setData失败
+                      var item = {};
+                      var key = "goodsList["+i+"].TAKERATE";
+                      var val = parseFloat((res.data[i]["TAKERATE"]*100).toFixed(1));
+                      item[key] = val;
+                      console.log(typeof val);
+                      me.setData(item);
+                    }
+                    //console.log(0 , me.data.goodsList[0].TAKERATE)
                     //app.setCusMsg(res.data) //set the local custom msg
 				}
 			})
@@ -185,6 +188,5 @@ var app = getApp()
 				icon: 'loading',
 				duration: 700
 			});
-
 		}
 	})

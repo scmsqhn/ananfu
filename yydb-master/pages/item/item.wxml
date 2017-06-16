@@ -4,6 +4,8 @@
   <text class="page__desc" style="color:#999999">{{itemdata.DESC}}</text>
   <scroll-view scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{itemdata}}" scroll-top="{{scrollTop}}" >
       <image src="{{itemdata.IMGURL2}}" bindload="imageLoad" data-index="{{ index}}" style="width:{{images[index].width}}rpx; height:{{ images[index].height}}rpx;"></image>
+      <image src="{{itemdata.IMGURL3}}" bindload="imageLoad" data-index="{{ index}}" style="width:{{images[index].width}}rpx; height:{{ images[index].height}}rpx;"></image>
+      <image src="{{itemdata.IMGURL4}}" bindload="imageLoad" data-index="{{ index}}" style="width:{{images[index].width}}rpx; height:{{ images[index].height}}rpx;"></image>
   </scroll-view>
   <button class="animation-button" style="background-color: #db3652"  bindtap="payit">付款</button>
 </view>

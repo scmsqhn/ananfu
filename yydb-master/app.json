@@ -22,17 +22,17 @@
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [{
-      "text": "夺宝",
+      "text": "拼单",
       "pagePath": "pages/home/home",
       "iconPath": "resources/images/ic_home.png",
       "selectedIconPath":"resources/images/ic_home_selected.png"
     },{
-      "text": "开奖",
+      "text": "结单",
       "pagePath": "pages/bingo/bingo",
       "iconPath": "resources/images/ic_win.png",
       "selectedIconPath":"resources/images/ic_win_selected.png"
     },{
-      "text": "清单",
+      "text": "购物车",
       "pagePath": "pages/shoppinglist/shoppinglist",
       "iconPath": "resources/images/ic_listing.png",
       "selectedIconPath":"resources/images/ic_listing_selected.png"

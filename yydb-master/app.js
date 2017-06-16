@@ -2,6 +2,7 @@
 var config = require('./config')
 
 	App({
+
 		globalData: {
 			timepre: -1,
 			openid: null,
@@ -50,8 +51,8 @@ var config = require('./config')
 					"time": "12分钟前"
 				}
 			],
-            goodsList: [
-            ],
+			goodsList: [
+			],
 			goodsList1: [{
 					"_id": 'ObjectId("59254fa234426eac99fe4eba")',
 					"BUYUNITS": 1,
@@ -67,7 +68,7 @@ var config = require('./config')
 					"TAKECHANCES": 13,
 					"TOTALCHANCES": 129,
 					"WINNER": "null"
-				},{
+				}, {
 					"_id": 'ObjectId("59254fa234426eac99fe4ebb")',
 					"BUYUNITS": 10,
 					"DESC": "长虹49LR1000 4K",
@@ -82,7 +83,7 @@ var config = require('./config')
 					"TAKECHANCES": 0,
 					"TOTALCHANCES": 3680,
 					"WINNER": "null"
-				},{
+				}, {
 					"_id": 'ObjectId("59254fa234426eac99fe4ebc")',
 					"BUYUNITS": 1,
 					"DESC": "长虹（CHANGHONG）A100翻盖智能手机移动4G双卡双待黑金色",
@@ -97,7 +98,7 @@ var config = require('./config')
 					"TAKECHANCES": 0,
 					"TOTALCHANCES": 999,
 					"WINNER": "null"
-				},{
+				}, {
 					"_id": 'ObjectId("59254fa234426eac99fe4ebd")',
 					"BUYUNITS": 1,
 					"DESC": "50元 手机充值卡",
@@ -126,9 +127,9 @@ var config = require('./config')
 				}
 		},
 		syncData: function (datain) {
-		  console.log("syncData: function(buyhistory)=" + datain)
-		  this.globalData["buyhistory"] = datain
-		  console.log('app.syncData 同步后 buyhistory 数据= ', this.globalData["buyhistory"])
+			console.log("syncData: function(buyhistory)=", datain)
+			this.globalData["buyhistory"] = datain
+				console.log('app.syncData 同步后 buyhistory 数据= ', this.globalData["buyhistory"])
 		},
 		timeSatis: function (trigger) {
 			if (Date.now() - this.globalData.timepre > trigger) {
@@ -139,29 +140,34 @@ var config = require('./config')
 		setTimePre: function () {
 			this.globalData.timepre = Date.now()
 		},
+		loginAnanfu: function () {
+			var me = this
+				me.getUserInfo(console.log) //重新登录
+		},
 		checkSession: function () {
-            var me= this
-			if (this.timeSatis(60000) || !this.globalData.userInfo) {
-				wx.checkSession({
-					success: function () {
-						//session 未过期，并且在本生命周期一直有效
-						console.log("登陆未过期,可以使用,session is inuse, OK")
-						me.getUserInfo(console.log) //重新登录
-					},
-					fail: function () {
-						//登录态过期
-						console.log("登陆过期,重新登陆")
-						me.getUserInfo(console.log) //重新登录
-					}
-				})
-			}
+			var me = this
+				if (this.timeSatis(60000) || !this.globalData.userInfo) {
+					wx.checkSession({
+						success: function () {
+							//session 未过期，并且在本生命周期一直有效
+							console.log("[x] 登录未过期,可以使用,session is inuse, OK")
+							me.getUserInfo(console.log) //重新登录
+						},
+						fail: function () {
+							//登录态过期
+							console.log("登陆过期,重新登陆")
+							me.getUserInfo(console.log) //重新登录
+						}
+					})
+				}
 		},
 		thirdLogin: function (code, encryptedData, iv, userinfo) {
-			wx.showToast({
-				title: '正在登录...',
-				icon: 'loading',
-				duration: 10000
-			});
+			var me = this
+				wx.showToast({
+					title: '正在登录...',
+					icon: 'loading',
+					duration: 10000
+				});
 			wx.request({
 				url: config.service.loginUrl,
 				data: {
@@ -176,12 +182,17 @@ var config = require('./config')
 				}, // 设置请求的 header
 				success: function (res) {
 					// success
-					console.log('SUCC 服务器返回' + res.data);
+					console.log('SUCC 服务器返回', res.data);
 					if (200 == res.statusCode) {
 						console.log("res.data= ", res.data)
-						getApp().syncData(res.data)
+						wx.setStorageSync("openid", res.data.openid)
+						wx.setStorageSync("intime", res.data.intime)
+						wx.setStorageSync("code", code)
+						//getApp().syncData(res.data)
 						getApp().setTimePre()
 						wx.hideToast();
+						me.getGoodsList()
+						me.getBuyHistory(res.data.openid)
 					}
 				},
 				fail: function (e) {
@@ -196,39 +207,55 @@ var config = require('./config')
 		},
 		onLaunch: function () {
 			//调用API从本地缓存中获取数据
-            console.log("onLaunch")
 			var me = this
+				console.log("onLaunch, openid= ", wx.getStorageSync("openid"))
+
 				var logs = wx.getStorageSync('logs') || []
 				logs.unshift(Date.now())
 				wx.setStorageSync('logs', logs)
-				var gl = wx.getStorageSync("goodsList")
-				if (gl != []) {
-					console.log("wx.getStorageSync 不为空")
-					console.log('wx.getStorageSync("goodsList"): ', gl);
-					me.globalData["goodsList"] = gl;
-				} else {
-					console.log("wx.getStorageSync 为空,重新获得")
+				var openid = wx.getStorageSync("openid")
+				console.log("[x] 获得openid=", openid)
+				console.log(openid.length)
+				if (openid.length != 0) {
+					this.getBuyHistory(openid)
 					this.getGoodsList()
+					console.log("[x] 通过openid,访问安安福服务器,获得数据")
+				} else {
+					me.loginAnanfu()
 				}
-				this.checkSession()
+				me.onReady()
+		},
+		onReady: function () {
+			var me = this
+				var gl = wx.getStorageSync("goodsList")
+				var bh = wx.getStorageSync("buyhistory")
+				me.globalData.goodsList = gl
+				me.globalData.buyhistory = bh
+				console.log('[x] 保存goodsList buyhistory在本地数据setData')
 		},
 		getUserInfo: function (cb) {
+            console.log("[x] app.getUserInfo传入参数cb: " , cb)
 			var that = this;
 			//调用登录接口
 			wx.login({
 				success: function (e) {
-					console.log('wx.login(sunccess)')
+					console.log('[x] 微信登录成功 wx.login(success)')
 					var code = e.code
-						console.log("code=" + code)
+						console.log('[x] 调用登录接口,获得code= ', code)
 						wx.getUserInfo({
 							success: function (res) {
 								console.log('wx.getUserInfo(sunccess)')
-								console.log('wxgetUserInfo successd........');
 								var encryptedData = encodeURIComponent(res.encryptedData);
 								console.log("code=", code, "\ncncryptedData=", encryptedData, "\nres.iv=", res.iv, "\nres.userinfo=", res.userInfo)
-                                wx.setStorageSync("code", code)
-                                console.log("将登陆后的code保存在Storage,code= ", code)
-								that.thirdLogin(code, encryptedData, res.iv, res.userInfo) //调用服务器api
+								wx.setStorageSync("code", code)
+								console.log("[x] 将登陆后的code保存在Storage,code= ", code)
+								var val = res.userInfo
+									var item = {}
+								item["userInfo"] = val
+									//console.log("[x] 保存用户信息:", JSON.stringify(item))
+									console.log("[x] 保存用户信息:", JSON.stringify(item))
+									wx.setStorageSync("userInfo", JSON.stringify(val)) //(JSON.stringify(item))
+									that.thirdLogin(code, encryptedData, res.iv, res.userInfo) //调用服务器api
 							}
 						})
 				}
@@ -267,11 +294,11 @@ var config = require('./config')
 		},
 		setCusMsg: function (data) {
 			var goodsList = this.globalData.goodsList
-            var orderList = this.globalData.orderList
-            goodsList = data.goodsList
-            orderList = data.orderList
-            console.log(goodsList)
-            console.log(orderList)
+				var orderList = this.globalData.orderList
+				goodsList = data.goodsList
+				orderList = data.orderList
+				console.log(goodsList)
+				console.log(orderList)
 		},
 		getDatafromStor() {
 			this.globalData["goodsList"] = getStorage("goodsList")
@@ -285,30 +312,30 @@ var config = require('./config')
 				url: config.service.orderList,
 				method: 'POST',
 				header: {
-                  'content-type': 'application/x-www-form-urlencoded'
+					'content-type': 'application/x-www-form-urlencoded'
 				},
 				data: {
-                  'code': code,
-                  'order': order
+					'code': code,
+					'order': order
 				},
 				success: function (res) {
-                  console.log('get opendId succ/r/n')
-                  var openId = res.data.openid;
-                  wx.setStorageSync("openId", openId)
+					var openId = res.data.openid;
+					console.log('[x] 获得OPENID: ', openId)
+					wx.setStorageSync("openId", openId)
 				}
 			})
 		},
 		addOrderList: function (index) {
-            
-            console.log('this.globalData["goodsList"]=', this.globalData["goodsList"])
-            console.log('index= ', index)
+
+			console.log('this.globalData["goodsList"]=', this.globalData["goodsList"])
+			console.log('index= ', index)
 			var item = this.globalData["goodsList"][index]
-            var goodsList = this.globalData["goodsList"]
-            console.log(item)
-            console.log(item)
-            var orderList = this.globalData["orderList"]
-            var lenth = orderList.length
-            this.showOrderList("BEFORE ")
+				var goodsList = this.globalData["goodsList"]
+				console.log(item)
+				console.log(item)
+				var orderList = this.globalData["orderList"]
+				var lenth = orderList.length
+				this.showOrderList("BEFORE ")
 				for (var i in orderList) {
 					console.log(item["PERIOD"] + "==" + orderList[i]["PERIOD"])
 					if (item["PERIOD"] == orderList[i]["PERIOD"]) {
@@ -321,7 +348,7 @@ var config = require('./config')
 					}
 				}
 				console.log("初次添加该商品")
-                console.log(item)
+				console.log(item)
 				item.setMore = 1
 				orderList.splice(lenth, 0, item)
 				console.log(item)
@@ -376,8 +403,7 @@ var config = require('./config')
 						if (200 == res.statusCode) {
 							console.log("读取下单记录返回res.data= ", res.data)
 							me.globalData["goodsList"] = res.data
-                            me.globalData["goodsList"] = res.data
-                            getApp().setTimePre()
+								getApp().setTimePre()
 						}
 					},
 					fail: function (e) {
@@ -392,14 +418,15 @@ var config = require('./config')
 					}
 				});
 		},
-		getBuyHistory: function () {
+		getBuyHistory: function (myopenid) {
 			console.log("app.getBuyHistory")
 			var me = this
+				console.log('[x] 获得OPENID: ', wx.getStorageSync("openid"))
 				wx.request({
 					url: config.service.sync,
 					data: {
 						code: 1003,
-						openid: wx.getStorageSync("openid")//"o44Xt0ESHNe6SSyVL9aP6B_noTdY"
+						openid: "qhn" //myopenid//"o44Xt0ESHNe6SSyVL9aP6B_noTdY"
 					},
 					method: 'GET',
 					header: {
@@ -408,8 +435,64 @@ var config = require('./config')
 					success: function (res) {
 						console.log('SUCC 购买历史服务器返回' + res.data);
 						if (200 == res.statusCode) {
+							console.log("[x] app.js 读取下单记录返回res.data= ", res.data)
+							me.globalData["buyhistory"] = res.data
+								getApp().setTimePre()
+								wx.setStorageSync("buyhistory", res.data)
+						}
+					},
+					fail: function (e) {
+						console.log('FAIL 服务器返回错误: ', e);
+						wx.hideToast();
+					},
+					complete: function () {
+						console.log('三方服务器登陆完毕,COMPLETE ');
+						console.log('获得购买历史: ', me.globalData.buyhistory)
+					}
+				});
+		},
+		getMyUserInfo: function (cb) {
+            console.log("getMyUserInfo 传入cb: ", cb)
+			var that = this
+				if (this.globalData.userInfo) {
+					typeof cb == "function" && cb(this.globalData.userInfo)
+                    console.log("getMyUserInfo this.globalData.userInfo=", this.globalData.userInfo)
+				} else {
+					//调用登录接口
+					wx.login({
+						success: function () {
+							wx.getUserInfo({
+								success: function (res) {
+									that.globalData.userInfo = res.userInfo
+										typeof cb == "function" && cb(that.globalData.userInfo)
+								}
+							})
+						}
+					})
+				}
+		},
+
+		getOpenID: function () {
+			console.log("app.getBuyHistory")
+			var me = this
+				console.log('[x] 获得OPENID: ', wx.getStorageSync("openid"))
+				wx.request({
+					url: config.service.sync,
+					data: {
+						code: 1003,
+						openid: myopenid //"o44Xt0ESHNe6SSyVL9aP6B_noTdY"
+					},
+
+					method: 'GET',
+					header: {
+						'content-type': 'application/json'
+					},
+					success: function (res) {
+						console.log('SUCC 购买历史服务器返回' + res.data);
+						if (200 == res.statusCode) {
 							console.log("读取下单记录返回res.data= ", res.data)
-							me.globalData.buyhistory = res.data
+							me.globalData["buyhistory"] = res.data
+								console.log("[x] me.globalData.buyhistory= ", res.data)
 								getApp().setTimePre()
 						}
 					},
@@ -420,6 +503,7 @@ var config = require('./config')
 					complete: function () {
 						console.log('三方服务器登陆完毕,COMPLETE ');
 						console.log('获得购买历史: ', me.globalData.buyhistory)
+						wx.setStorageSync("buyhistory", me.globalData.buyhistory)
 					}
 				});
 		},

@@ -1,19 +1,55 @@
 <!-- history.wxml -->
-<view class="goods-panel" bindtap="refresh" bindtap="onClick">
-	<template is="buyhistory" data="{{buyhistory:buyhistory}}"/>
+<view class="container">
+  <view  bindtap="bindViewTap" style="width: 100%"class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}} in {{userInfo.city}}</text>
+  </view>  
+  <view class="info_list" style="width:100%">
+  <block wx:for="{{userListInfo}}">
+        <view id="{{item.id}}" class="widgets__info {{item.open ? 'widgets__info_show' : ''}}" bindtap="widgetsToggle">
+            <view class = "weui_name" style="width:100%">
+            <view class="weui_cell_hd">
+              <image src="{{item.icon}}"></image>
+            </view>
+            <view class="weui_cell_bd">
+                <view class="weui_cell_bd_p"> {{item.text}} </view>
+            </view>
+            <image class="widgets__info-img" src="../../resources/images/arrowright.png" mode="aspectFill" />
+            </view>
+            <view wx:if="{{item.isunread}}" class="badge">{{item.unreadNum}}</view>
+                <view class="widgets__list {{item.open ? 'widgets__list_show' : ''}}">
+                    <block wx:for-items="{{item.pages}}" wx:for-item="page">
+                            <navigator url="pages/{{page}}/{{page}}" class="widget">
+                                <text class="widget__name">{{page}}</text>
+                                <image class="widget__arrow" src="../../resources/images/arrowright.png" mode="aspectFill" />
+                                <view class="widget__line {{index == 0 ? 'widget__line_first' : ''}}"></view>
+                            </navigator>
+                    </block>
+                </view>
+                            
+
+        </view>
+    </block>
+  </view>  
 </view>
 
-<template name="buyhistory">
-    <block wx:for="{{buyhistory}}">
-        <template is="goodsItem" data="{{index:index,goods:item}}"/>
-    </block>
-</template>
 
-<template name="goodsItem">
-    <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}">
+                
+<!--  <view class="goods-panel" bindtap="refresh" bindtap="onClick">
+	<template is="buyhistory" data="{{buyhistory:buyhistory}}"/>
+  </view>
+
+    <template name="buyhistory">
+      <block wx:for="{{buyhistory}}">
+        <template is="goodsItem" data="{{index:index,goods:item}}"/>
+      </block>
+    </template>
+
+    <template name="goodsItem">
+        <view class="goods-item{{index % 2 == 0?' odd':''}}" id="tapTest" data-index="{{index}}">
             <view class="goods">
                 <view class="goods-tag ten"/>
-                <image class="goods-image" src="{{goods.IMGURL2}}"/>
+                <image class="goods-image" src="{{goods.IMGURL}}"/>
                 <view class="desc-wrapper">
                     <view class="goods-desc">{{goods.NAME}}</view>
                 </view>
@@ -23,4 +59,5 @@
                 <view class="btn" data-index="{{index}}">中奖</view>
             </view>
         </view>
-</template>
+    </template>
+-->

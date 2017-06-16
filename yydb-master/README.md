@@ -368,3 +368,17 @@ PS:LANREN12345
 # 8:46 2017/6/9
 wxa6d9e2698142dcab
 d75c90ba2602cf610cf2b39f4a39c4fe
+
+--
+# 11:30 2017/6/12
+## 修改登陆流程
+[x] 获得openid流程
+[x] 获得buyhistory流程
+---
+# 点餐app
+[x] 源码下载 https://my.oschina.net/cnplugins/blog/846281
+
+---
+# 点餐app
+[x] 9bVbg2NuoTY55Z-trHSMjkfH-NXz0U8XsE9JdE_QdT4
+[x] 
