@@ -147,12 +147,13 @@ var config = require("../../config.js")
 			console.log("start payit\r\n")
 			var that = this;
             wx.getStorage({
-              key: "code",
+              key:'openid',
               success: function(res){
                 console.log("Storage 取code =", JSON.stringify(res.data))    
-                var code = res.data
-                var orderList = getApp().getData('orderList')
-                that.getOpenId(code, orderList);
+                var openid = res.data
+                var orderList = app.getData()["orderList"]
+                console.log('[x] [openid,orderList]:', openid, orderList)
+                that.getOpenId(openid, orderList);
               },
               fail: function(err){
                 console.log("err: ", err)    
@@ -187,10 +188,12 @@ var config = require("../../config.js")
             })*/
 		},
 		//获取openid
-		getOpenId: function (code, order) {
+		getOpenId: function (openid, orderlist) {
 			//console.log("getOpenId")
 			//console.log(code)
 			//console.log(order)
+            var order = JSON.stringify(orderlist)
+            console.log("[x] order= ", order)
 			wx.request({
 				//用 code 换取 openid 和 session_key
 				url: config.service.orderList,
@@ -199,7 +202,7 @@ var config = require("../../config.js")
 					'content-type': 'application/x-www-form-urlencoded'
 				},
 				data: {
-					'code': code,
+					'code': openid,
 					'order': order
 				},
 				success: function (res) {

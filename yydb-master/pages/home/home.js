@@ -48,7 +48,9 @@ var app = getApp()
             console.log("onReady")
         },onLoad: function () {
 			var me = this;
-            me.setData({goodsList : app.getData().goodsList});
+            var item = {};
+            item["goodsList"] = app.getData().goodsList;
+            me.setData(item);
 			var animation = wx.createAnimation({
 					duration: 1000,
 					timingFunction: 'ease-out',
