@@ -329,7 +329,7 @@
 }
 .widgets__info_show{
     display: flex;
-    padding: 40rpx;
+    padding: 10rpx;
     align-items: left;
     position: relative;
     border-bottom: 1px solid #dadada;

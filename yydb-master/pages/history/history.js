@@ -72,6 +72,7 @@ Page({
 		var me = this;
 		console.log("[x] 下单历史 history onLoad");
 		var userInfo = wx.getStorageSync("userInfo");
+        console.log('userInfo=', userInfo)
 		if (userInfo.length == 0) {
 			//调用应用实例的方法获取全局数据
 			app.getUserInfo(function (userInfo) {
@@ -84,12 +85,12 @@ Page({
 		}
 		console.log(userInfo);
 		var item = {};
-		item["userInfo"] = JSON.parse(userInfo);
+		item["userInfo"] = userInfo;
 		console.log('[x] item["userInfo"]= ', item["userInfo"]);
 		me.setData(item);
 		var buyhistory = wx.getStorageSync("buyhistory");
 		var goodsList = wx.getStorageSync("goodsList");
-		console.log(buyhistory);
+		console.log("[x] buyhistory=", buyhistory);
 		this.setData({
 			buyhistory: buyhistory
 		});

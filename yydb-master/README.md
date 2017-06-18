@@ -381,4 +381,43 @@ d75c90ba2602cf610cf2b39f4a39c4fe
 ---
 # 点餐app
 [x] 9bVbg2NuoTY55Z-trHSMjkfH-NXz0U8XsE9JdE_QdT4
-[x] 
+---
+# 10:00 2017/6/18
+手机游戏,浏览器游戏是好的选择,处于洗牌前夕,行业变革大,新模式生存机会多;
+类似的还有家装行业,农产品分销行业,小散乱,行业内的企业都在探索新模式,等待洗牌;
+# 20:58 2017/6/18 aldwx 阿拉丁微信统计
+您的App Key：aa43b3de39f018050864144de315ff5b
+# 使用xpmjs后台适配微信小程序 http://git.oschina.net/xpmjs/xpmjs
+方法3: 使用 Docker 安装
+
+# 安装 Docker 
+curl -sSL https://get.daocloud.io/docker | sh
+
+# 启动容器
+sudo docker run -d --name=xpmjs-server  \
+    -e "HOST=70139330.qcloud.la/" \
+    -v /host/data:/data  \
+    -v /host/apps:/apps  \
+    -v /host/config:/config  \
+    -p 80:80 -p 443:443  \
+    tuanduimao/xpmjs-server:1.0
+
+    
+方法2: 安装脚本
+
+安装前，先提前申请 Docker Hub 镜像 申请地址 https://www.daocloud.io/mirror
+
+# 请采用 Ubuntu 14.04 64位 LTS
+curl -sSL http://tuanduimao.com/xpmjs-server.sh | sh -s yourdomain.com http://<your id>.m.daocloud.io
+
+http://70139330.qcloud.la/setup.php
+
+---
+# 22:43 2017/6/18 我的小程序架构
+.
+┣━ client: 原生架构功能实现
+┃   ┗━ aldwx: 微信三方信息搜集分析平台
+┗━ server: 小程序server 自研server nodejs
+     ┣━ xpmjs: 团队猫提供,微信小程序server框架
+     ┗━ nodejs: 
+

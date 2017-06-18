@@ -1,4 +1,5 @@
 //app.js
+var aldstat = require("./utils/ald-stat.js");
 var config = require('./config')
 
   App({
@@ -262,6 +263,7 @@ var config = require('./config')
                         item["userinfo"] = res.userInfo;
                         item["openid"] = openid
                         console.log("[x] 登录信息,item= ", item)
+                        wx.setStorageSync("userInfo", res.userInfo)
                         wx.setStorageSync("code", code)
                         wx.setStorageSync("openid", openid)
                         wx.setStorageSync("intime", Date.now())
